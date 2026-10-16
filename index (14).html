@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guilherme Dev | Desenvolvimento de Sites Profissionais</title>
+<meta name="description" content="Desenvolvimento de sites modernos, responsivos e personalizados para empresas e profissionais.">
+<style>
+/* ===== VARIÁVEIS (altere cores aqui) ===== */
+:root{--bg:#07080d;--card:rgba(255,255,255,.05);--borda:rgba(255,255,255,.1);--txt:#f4f5fa;--mut:#a3a8bd;--azul:#4f8cff;--roxo:#8b5cf6;--grad:linear-gradient(135deg,var(--azul),var(--roxo));--r:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:radial-gradient(900px 500px at 85% -5%,rgba(139,92,246,.18),transparent),radial-gradient(700px 400px at 0 30%,rgba(79,140,255,.12),transparent),var(--bg);color:var(--txt);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+.container{width:min(1140px,92%);margin-inline:auto}
+.skip{position:absolute;left:-999px;background:#fff;color:#000;padding:8px 12px;z-index:200}.skip:focus{left:8px;top:8px}
+.muted{color:var(--mut)}
+h1{font-size:clamp(2.2rem,5.5vw,3.8rem);line-height:1.1;letter-spacing:-.02em}
+h2{font-size:clamp(1.7rem,3.5vw,2.4rem);letter-spacing:-.01em;margin-bottom:.5rem}
+h3{font-size:1.2rem;margin-bottom:.5rem}
+.sec{padding:clamp(56px,9vw,110px) 0 0}
+.sec-sub{color:var(--mut);margin-bottom:2rem;max-width:60ch}
+.glass{background:var(--card);border:1px solid var(--borda);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:var(--r);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+
+/* Topo / menu */
+.topo{position:fixed;inset:0 0 auto;z-index:100;background:rgba(7,8,13,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--borda)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:inline-flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.2rem}
+.logo-nome{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo-foto{display:block;width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(139,92,246,.65);background:var(--card);box-shadow:0 0 0 3px rgba(79,140,255,.12),0 4px 14px rgba(139,92,246,.35)}
+.logo-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.logo-foto.sem-foto img{display:none}
+.logo-foto{cursor:pointer}
+@media(max-width:480px){.logo{gap:.5rem;font-size:1.1rem}.logo-foto{width:32px;height:32px}}
+.menu{display:flex;gap:1.6rem}
+.menu a{color:var(--mut);font-size:.95rem;transition:color .2s}.menu a:hover{color:var(--txt)}
+.burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.burger span{width:24px;height:2px;background:var(--txt);transition:.25s}
+.burger[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded=true] span:nth-child(2){opacity:0}
+.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Botões */
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer;font:inherit;font-weight:700;text-align:center;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 8px 28px rgba(99,102,241,.35)}.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(99,102,241,.5)}
+.btn-s{border-color:var(--borda);background:var(--card)}.btn-s:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding-top:140px;min-height:100vh}
+.sub{color:var(--mut);font-size:1.15rem;margin:1.2rem 0 2rem;max-width:52ch}
+.botoes{display:flex;gap:1rem;flex-wrap:wrap}
+.botoes .btn{padding-inline:18px;white-space:nowrap}.botoes{gap:.6rem}
+.stats{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
+.stats b{display:block;font-size:1.6rem}.stats span{color:var(--mut);font-size:.85rem}
+.code{padding:0 0 1.2rem;font-family:ui-monospace,Consolas,monospace;font-size:.95rem;animation:flutua 6s ease-in-out infinite}
+.code-bar{display:flex;gap:6px;padding:14px;border-bottom:1px solid var(--borda)}
+.code-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
+.code pre{padding:1.2rem 1.4rem;overflow-x:auto}
+.c1{color:var(--roxo);font-weight:700}.c2{color:var(--azul)}.c3{color:#c4b5fd}.c4{color:#7ee0a8}.c5{color:#a5b4fc}
+.chips{display:flex;gap:.6rem;padding:0 1.4rem}.chips b{padding:4px 14px;border-radius:999px;background:var(--grad);font-size:.8rem}
+/* card de código do Hero (janela de editor) */
+.code{position:relative;padding-bottom:3.4rem}
+.code em{font-style:normal;animation:pulsa 2s ease-in-out infinite}
+.code-bar .st{margin-left:auto;font-size:.7rem;font-weight:700;letter-spacing:.1em;color:#a5b4fc}
+.code-sub{padding:12px 1.4rem 4px;font-size:.75rem;color:var(--azul)}
+.ed{margin:10px 1rem 0;border:1px solid var(--borda);border-radius:14px;background:rgba(7,8,13,.55);overflow:hidden}
+.ed-top{display:flex;justify-content:space-between;padding:9px 1.1rem;font-size:.75rem;color:var(--mut);border-bottom:1px solid var(--borda)}
+.cod{padding:1rem 1.1rem;font-size:.78rem;line-height:1.8}
+.cod .l{display:flex;gap:1rem;white-space:pre-wrap;min-height:1.8em}
+.cod .ln{flex:none;width:2ch;font-weight:400;color:rgba(163,168,189,.4);user-select:none}
+.cod .cm{color:rgba(163,168,189,.7)}
+.cur{display:inline-block;width:8px;height:1.15em;vertical-align:text-bottom;background:var(--azul);animation:pisca 1s steps(1) infinite}
+.prog{height:3px;background:rgba(255,255,255,.07)}
+.prog i{display:block;height:100%;width:30%;background:var(--grad);animation:progresso 5s ease-in-out infinite alternate}
+.code-rod{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;padding:14px 1.4rem 0}
+.code-rod .chips{padding:0}
+.ativo{font-size:.75rem;color:#a5b4fc}
+.code-selo{position:absolute;right:14px;bottom:-22px;display:flex;flex-direction:column;padding:9px 16px;border-radius:14px;background:var(--grad);box-shadow:0 10px 30px rgba(99,102,241,.4);line-height:1.3}
+.code-selo b{font-size:.85rem}.code-selo span{font-size:.72rem;opacity:.85}
+@keyframes pisca{50%{opacity:0}}
+@keyframes progresso{to{width:96%}}
+@keyframes pulsa{50%{opacity:.35}}
+@media(max-width:600px){.cod{font-size:.72rem}.cod .l{gap:.7rem}}
+@keyframes flutua{50%{transform:translateY(-10px)}}
+
+/* ===== CHUVA DE CÓDIGO (fundo da seção Início) ===== */
+.hero{position:relative;isolation:isolate}
+#conteudo{overflow-x:clip}
+.chuva-codigo{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;z-index:-1;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 70%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 70%,transparent 100%)}
+/* camada escura por cima dos códigos: mantém o texto legível (mais escura onde fica o texto, à esquerda) */
+.chuva-codigo::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 420px at 50% 40%,rgba(79,140,255,.07),transparent),linear-gradient(90deg,rgba(7,8,13,.74) 0%,rgba(7,8,13,.46) 50%,rgba(7,8,13,.18) 100%)}
+.chuva-fluxo{position:absolute;top:0;left:0;will-change:transform;animation:chuva-cair linear infinite;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.chuva-fluxo div{height:26px;line-height:26px;font-size:13.5px;white-space:nowrap}
+.chuva-fluxo .b{text-shadow:0 0 10px currentColor,0 0 3px currentColor}
+.chuva-codigo.pausada .chuva-fluxo{animation-play-state:paused}
+.tem-chuva{position:relative;isolation:isolate}
+.chuva-fluxo .f{font-weight:700;letter-spacing:.06em;text-shadow:0 0 12px currentColor,0 0 3px currentColor}
+@keyframes chuva-cair{from{transform:translate3d(0,var(--ini,-400px),0)}to{transform:translate3d(0,var(--fim,900px),0)}}
+@media(max-width:900px){.chuva-codigo::after{background:linear-gradient(rgba(7,8,13,.6),rgba(7,8,13,.52))}}
+@media(max-width:600px){.chuva-fluxo div{height:24px;line-height:24px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.chuva-codigo{display:none}}
+
+/* ===== ÁREA ⚙ CONFIGURAÇÃO (modal do administrador) ===== */
+.adm-fundo{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(3,4,8,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.adm-fundo[hidden]{display:none}
+.adm-caixa{position:relative;width:min(440px,100%);max-height:100%;overflow:auto;padding:28px 26px 24px;background:rgba(15,17,28,.97)}
+.adm-caixa h2{font-size:1.35rem;margin:0 0 .35rem;padding-right:34px}
+.adm-caixa p{color:var(--mut);font-size:.92rem;margin:0 0 1.1rem}
+.adm-caixa label{display:block;font-size:.88rem;color:var(--mut);margin-bottom:6px}
+.adm-caixa input{width:100%;padding:13px 15px;border-radius:12px;border:1px solid var(--borda);background:rgba(255,255,255,.05);color:var(--txt);font:inherit}
+.adm-caixa input:focus{outline:2px solid var(--azul);outline-offset:1px}
+.adm-linha{display:flex;gap:.6rem;align-items:stretch}
+.adm-linha input{flex:1;min-width:0}.adm-linha .btn{padding:12px 22px}
+.adm-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--borda);background:var(--card);color:var(--txt);font-size:1.2rem;line-height:1;cursor:pointer}
+.adm-x:hover{background:rgba(255,255,255,.12)}
+.adm-msg{min-height:1.3em;margin:.8rem 0 0;font-size:.9rem;color:#ff8a8a}.adm-msg.ok{color:#7ee0a8}
+.adm-info{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--borda);font-size:.82rem;color:var(--mut);word-break:break-all}
+.adm-info b{color:var(--txt)}
+.adm-sair{margin-top:1rem;background:none;border:0;color:var(--mut);font:inherit;font-size:.88rem;text-decoration:underline;cursor:pointer;padding:4px 0}
+@media(max-width:420px){.adm-linha{flex-direction:column}}
+/* com o item extra no menu, aperta um pouco o espaço entre os links só nas larguras onde faltava espaço */
+@media(min-width:821px) and (max-width:1000px){.menu{gap:1rem}.menu a{font-size:.88rem;white-space:nowrap}}
+@media(min-width:821px) and (max-width:920px){.menu{gap:.7rem}.menu a{font-size:.8rem}}
+@media(min-width:821px) and (max-width:870px){.menu{gap:.45rem}.menu a{font-size:.76rem}}
+
+/* Grids / cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
+.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{padding:1.8rem;display:flex;flex-direction:column;gap:.8rem;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-5px);border-color:rgba(139,92,246,.6)}
+.card p{color:var(--mut)}.card .btn{margin-top:auto}
+.ico{font-size:2rem}
+.preco{font-size:1.9rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lista{display:grid;gap:.5rem;margin:1rem 0}.lista li::before{content:"✔ ";color:#7ee0a8}
+.plano.top{border-color:var(--roxo);transform:scale(1.04);background:linear-gradient(160deg,rgba(79,140,255,.16),rgba(139,92,246,.2));position:relative}
+.plano.top:hover{transform:scale(1.04) translateY(-5px)}
+.selo{position:absolute;top:-14px;left:50%;translate:-50% 0;background:var(--grad);padding:4px 16px;border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap}
+.etapas li{counter-increment:e}
+.etapas .num{font-size:2.4rem;font-weight:800;color:var(--roxo)}
+
+/* Projetos */
+.proj{padding:1.4rem;display:flex;flex-direction:column;gap:.8rem;transition:transform .25s}.proj:hover{transform:translateY(-5px)}
+.dev{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#1a1d2e,#0e1019);border-radius:14px;display:grid;place-items:center;overflow:hidden}
+.dev.notebook{border:6px solid #23263a;border-bottom-width:14px;border-radius:12px 12px 4px 4px}
+.dev.celular{width:46%;aspect-ratio:9/17;margin:0 auto;border:6px solid #23263a;border-radius:24px}
+.dev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dev span{font-weight:800;padding:1rem;text-align:center;color:var(--mut)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}.tags b,.techs b{font-size:.78rem;font-weight:600;padding:3px 12px;border-radius:999px;background:rgba(79,140,255,.15);border:1px solid rgba(79,140,255,.35)}
+.proj .btn{align-self:flex-start;padding:10px 22px}
+
+/* Sobre / tecnologias */
+.sobre{display:grid;grid-template-columns:1fr 1fr;gap:3rem}.sobre p{margin-bottom:1rem;color:var(--mut)}
+.techs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem}
+.techs div{padding:1.2rem;text-align:center;border-radius:var(--r);background:var(--card);border:1px solid var(--borda);transition:transform .25s}.techs div:hover{transform:translateY(-4px)}
+.techs div span{display:block;font-size:1.8rem}
+
+.destaque{padding:clamp(1.8rem,5vw,3.5rem);text-align:center;border-color:rgba(139,92,246,.5)}
+.destaque .sec-sub{margin-inline:auto}.destaque .lista{max-width:340px;margin-inline:auto;text-align:left}
+.depo{border-style:dashed}.depo small{color:var(--azul);font-weight:700}
+
+/* Formulário */
+.contato{padding:clamp(1.5rem,5vw,3.5rem)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.campo{display:grid;gap:.35rem}.full{grid-column:1/-1}
+label{font-size:.9rem;color:var(--mut)}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--borda);background:rgba(0,0,0,.35);color:var(--txt);font:inherit}
+select option{background:#12141f}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--azul);border-color:transparent}
+.erro{grid-column:1/-1;color:#ff8a8a;min-height:1.2em;font-size:.9rem}
+
+/* Rodapé / flutuante */
+.rodape{margin-top:110px;border-top:1px solid var(--borda);padding:3rem 0 1.5rem}
+.foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
+.flinks{display:grid;gap:.4rem}.rodape a:hover{color:var(--azul)}
+.copy{text-align:center;color:var(--mut);font-size:.85rem;margin-top:2rem}
+.flutuante{position:fixed;right:18px;bottom:18px;z-index:90;background:#25d366;color:#04230f;font-weight:800;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:transform .2s}.flutuante:hover{transform:scale(1.06)}
+
+/* Animação de scroll */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+
+/* Responsivo */
+@media(max-width:900px){.hero,.sobre{grid-template-columns:1fr}.hero{padding-top:110px;min-height:0}.plano.top,.plano.top:hover{transform:none}}
+@media(max-width:820px){
+  .burger{display:flex}
+  .menu{position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:rgba(7,8,13,.97);border-bottom:1px solid var(--borda);max-height:0;overflow:hidden;transition:max-height .3s}
+  .menu.aberto{max-height:480px}.menu a{display:block;padding:15px 5%}
+}
+@media(max-width:600px){.botoes .btn,.destaque .btn{width:100%}form{grid-template-columns:1fr}.flutuante{left:18px;text-align:center}}
+
+html{color-scheme:dark}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}.topo{top:env(safe-area-inset-top,0px)}.flutuante{bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+/* ===== DEMONSTRAÇÃO: Loja Virtual (VITRINE) — abre na mesma página, por cima do portfólio ===== */
+.dm{position:fixed;inset:0;z-index:300;overflow-y:auto;overscroll-behavior:contain;background:var(--bg);color:var(--txt);-webkit-overflow-scrolling:touch}
+.dm[hidden],.dm [hidden]{display:none!important}
+.dm .btn{font-size:.9rem;padding:11px 20px}
+.dm-aviso{display:flex;gap:.8rem;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:rgba(139,92,246,.14);border-bottom:1px solid var(--borda);font-size:.8rem;color:var(--mut);text-align:center}
+.dm-aviso .btn{padding:6px 14px;font-size:.75rem}
+.dm-topo{position:sticky;top:0;z-index:5;background:rgba(7,8,13,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--borda)}
+.dm-wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+.dm-barra{display:flex;align-items:center;gap:.8rem;padding:12px 0;flex-wrap:wrap}
+.dm-logo{font-weight:800;font-size:1.35rem;letter-spacing:.18em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-right:auto}
+.dm-nav{display:flex;gap:1.2rem;font-size:.9rem}
+.dm-nav a,.dm-link{color:var(--mut);cursor:pointer;background:none;border:0;font:inherit;padding:6px 0}
+.dm-nav a:hover,.dm-link:hover{color:var(--txt)}
+.dm-sac{background:var(--card);border:1px solid var(--borda);color:var(--txt);border-radius:999px;padding:9px 18px;font:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+.dm-sac:hover{border-color:var(--azul)}
+.dm-voltar{background:none;border:1px solid var(--borda);color:var(--txt);border-radius:999px;padding:9px 16px;font:inherit;font-size:.85rem;cursor:pointer}
+.dm-voltar:hover{background:rgba(255,255,255,.08)}
+.dm-banner{margin:26px 0;padding:clamp(34px,7vw,72px) clamp(20px,5vw,56px);border-radius:var(--r);border:1px solid var(--borda);background:radial-gradient(600px 300px at 80% 0,rgba(139,92,246,.28),transparent),radial-gradient(500px 280px at 0 100%,rgba(79,140,255,.22),transparent),var(--card);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.dm-tag{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--grad);font-size:.72rem;font-weight:800;letter-spacing:.14em;margin-bottom:1.1rem}
+.dm-banner h1{font-size:clamp(1.7rem,4.6vw,3rem);line-height:1.15;max-width:18ch;margin-bottom:.9rem}
+.dm-banner p{color:var(--mut);max-width:46ch;margin-bottom:1.6rem}
+.dm h2{font-size:1.4rem;margin:2.2rem 0 1rem}
+.dm [id^=dm-]{scroll-margin-top:130px}
+.dm-cats{display:flex;gap:.6rem;flex-wrap:wrap}
+.dm-cat{padding:8px 18px;border-radius:999px;border:1px solid var(--borda);background:var(--card);color:var(--txt);font:inherit;font-size:.88rem;cursor:pointer;transition:.2s}
+.dm-cat:hover{border-color:var(--azul)}
+.dm-cat.on{background:var(--grad);border-color:transparent;box-shadow:0 6px 20px rgba(99,102,241,.35)}
+.dm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
+.dm-card{background:var(--card);border:1px solid var(--borda);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:.5rem;transition:.25s}
+.dm-card:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.55);box-shadow:0 14px 34px rgba(99,102,241,.2)}
+.dm-img{position:relative;display:grid;place-items:center;height:140px;border-radius:14px;font-size:3.6rem;background:radial-gradient(circle at 50% 40%,rgba(139,92,246,.3),rgba(79,140,255,.08) 60%,transparent),rgba(255,255,255,.03);border:1px solid var(--borda)}
+.dm-sel{position:absolute;top:8px;left:8px;font-size:.62rem;font-weight:800;letter-spacing:.1em;padding:3px 9px;border-radius:999px;background:var(--grad)}
+.dm-card h3{font-size:1rem;margin-top:.3rem}
+.dm-cat-n{color:var(--mut);font-size:.78rem}
+.dm-preco{font-size:1.15rem;font-weight:800;color:#a5b4fc}
+.dm-card .btn{width:100%;margin-top:auto;padding:10px 12px;font-size:.78rem}
+.dm-ofertas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.dm-of{padding:16px 18px;border-radius:16px;border:1px dashed rgba(139,92,246,.5);background:rgba(139,92,246,.07);font-size:.92rem}
+.dm-of b{display:block;color:#c4b5fd;margin-bottom:.2rem}
+.dm-fim{margin:2.6rem 0 0;padding:28px 18px;border-top:1px solid var(--borda);text-align:center;color:var(--mut);font-size:.88rem}
+.dm-cta{margin:2.4rem 0 0;padding:clamp(26px,5vw,44px);text-align:center;border-radius:var(--r);border:1px solid var(--borda);background:radial-gradient(500px 220px at 50% 0,rgba(79,140,255,.2),transparent),var(--card)}
+.dm-cta h2{margin:0 0 .6rem}.dm-cta p{color:var(--mut);margin-bottom:1.3rem}
+.dm-acoes{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+/* sacola (gaveta) */
+.dm-fundo{position:fixed;inset:0;z-index:310;background:rgba(0,0,0,.6);backdrop-filter:blur(3px)}
+.dm-gaveta{position:fixed;top:0;right:0;bottom:0;z-index:320;width:min(420px,100%);display:flex;flex-direction:column;background:#0b0d16;border-left:1px solid var(--borda);box-shadow:-20px 0 50px rgba(0,0,0,.5)}
+.dm-gh{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--borda)}
+.dm-gh h2{margin:0;font-size:1.15rem}
+.dm-x{background:none;border:0;color:var(--txt);font-size:1.5rem;cursor:pointer;line-height:1;padding:4px 8px}
+.dm-itens{flex:1;overflow-y:auto;padding:14px 18px;display:grid;gap:.8rem;align-content:start}
+.dm-vazio{color:var(--mut);text-align:center;padding:40px 10px}
+.dm-it{display:grid;grid-template-columns:48px 1fr auto;gap:.2rem .8rem;align-items:center;padding:10px;border:1px solid var(--borda);border-radius:14px;background:var(--card)}
+.dm-it .ic{grid-row:span 2;display:grid;place-items:center;height:48px;border-radius:12px;font-size:1.6rem;background:rgba(139,92,246,.15)}
+.dm-it b{font-size:.92rem}.dm-it small{color:var(--mut)}
+.dm-qtd{display:flex;align-items:center;gap:.5rem}
+.dm-qtd button{width:28px;height:28px;border-radius:50%;border:1px solid var(--borda);background:var(--card);color:var(--txt);cursor:pointer;font-size:1rem;line-height:1}
+.dm-qtd button:hover{border-color:var(--azul)}
+.dm-rm{background:none;border:0;color:#ff8a8a;font:inherit;font-size:.78rem;cursor:pointer;padding:0}
+.dm-gf{padding:16px 18px;border-top:1px solid var(--borda);display:grid;gap:.7rem}
+.dm-tot{display:flex;justify-content:space-between;font-size:1.1rem;font-weight:800}
+.dm-gf .btn{width:100%}
+.dm-toast{position:fixed;left:50%;top:76px;translate:-50% 0;z-index:340;padding:10px 20px;border-radius:999px;background:var(--grad);font-size:.88rem;font-weight:700;box-shadow:0 10px 30px rgba(99,102,241,.45)}
+/* apresentação: como funciona a criação do site */
+.dm-ap{max-width:760px;margin:0 auto;padding:40px 18px 60px}
+.dm-ap h1{font-size:clamp(1.6rem,4.4vw,2.4rem);margin:.8rem 0 .6rem}
+.dm-ap>p{color:var(--mut);margin-bottom:2rem}
+.dm-ap>.dm-voltar{display:block}
+.dm-etapas{display:grid;gap:1rem;position:relative}
+.dm-et{display:grid;grid-template-columns:48px 1fr;gap:1rem;align-items:center;padding:16px 18px;border:1px solid var(--borda);border-radius:var(--r);background:var(--card);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.dm-et .n{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--grad);font-weight:800;box-shadow:0 6px 20px rgba(99,102,241,.4)}
+.dm-et span{font-size:1.02rem}
+@media(max-width:600px){.dm-nav{order:5;width:100%;justify-content:space-between;gap:.4rem}.dm-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}.dm-img{height:110px;font-size:2.8rem}.dm-card{padding:9px}.dm-logo{font-size:1.15rem}.dm-toast{width:max-content;max-width:92%}}
+/* ===== DEMONSTRAÇÃO: Site para Barbearia (BARBER CLUB) — mesma base .dm da loja ===== */
+.bb-logo{display:flex;align-items:center;gap:.5rem;margin-right:auto;font-size:1.3rem}
+.bb-logo .dm-logo{margin:0}
+.bb-hero{display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center}
+.bb-hero h1{max-width:none}
+.bb-hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bb-checks{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin-top:1.4rem;color:#c4b5fd;font-size:.92rem}
+.bb-poste{display:grid;place-items:center;aspect-ratio:1;max-width:240px;margin-inline:auto;width:100%;border-radius:50%;font-size:5.5rem;border:1px solid var(--borda);background:radial-gradient(circle at 50% 40%,rgba(139,92,246,.4),rgba(79,140,255,.1) 65%,transparent);box-shadow:0 0 70px rgba(99,102,241,.35)}
+.bb-svc .dm-img{height:96px;font-size:2.8rem}
+.bb-svc .dm-preco{font-size:1.05rem}
+.bb-svc .dm-cat-n{font-size:.8rem}
+.bb-wiz{padding:clamp(18px,4vw,34px);border:1px solid var(--borda);border-radius:var(--r);background:var(--card);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.bb-steps{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.bb-st{flex:1;min-width:90px;padding:8px 10px;border-radius:12px;border:1px solid var(--borda);font-size:.78rem;color:var(--mut);text-align:center}
+.bb-st.on{border-color:transparent;background:var(--grad);color:#fff;font-weight:700}
+.bb-st.ok{border-color:rgba(139,92,246,.6);color:#c4b5fd}
+.bb-wiz h3{font-size:1.2rem;margin-bottom:1rem}
+.bb-wiz h4{font-size:.95rem;color:var(--mut);margin:1.3rem 0 .7rem;font-weight:600}
+.bb-ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem}
+.bb-op,.bb-b,.bb-t{font:inherit;color:var(--txt);cursor:pointer;border:1px solid var(--borda);background:rgba(255,255,255,.03);transition:.2s}
+.bb-op{display:flex;justify-content:space-between;align-items:center;gap:.6rem;text-align:left;padding:13px 16px;border-radius:14px}
+.bb-op small{color:var(--mut)}
+.bb-op:hover,.bb-b:hover,.bb-t:hover{border-color:var(--azul)}
+.bb-op.on,.bb-b.on,.bb-t.on{border-color:transparent;background:var(--grad);box-shadow:0 8px 24px rgba(99,102,241,.35)}
+.bb-op.on small{color:#e0e7ff}
+.bb-barbs{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.bb-b{display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:16px 8px;border-radius:16px}
+.bb-av{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;font-weight:800;font-size:1.3rem;background:radial-gradient(circle,rgba(139,92,246,.45),rgba(79,140,255,.15));border:1px solid rgba(139,92,246,.55)}
+.bb-b.on .bb-av{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5)}
+.bb-b small{color:var(--mut)}.bb-b.on small{color:#e0e7ff}
+.bb-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.bb-t{padding:12px 6px;border-radius:12px;font-weight:700;text-align:center}
+.bb-nav{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.6rem}
+.bb-wiz .btn[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
+.bb-ok{text-align:center}
+.bb-ok .tick{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 1rem;border-radius:50%;background:var(--grad);font-size:2rem;font-weight:800;box-shadow:0 0 40px rgba(99,102,241,.5)}
+.bb-resumo{max-width:380px;margin:1.2rem auto;display:grid;gap:.5rem;text-align:left}
+.bb-resumo div{display:flex;justify-content:space-between;gap:1rem;padding:10px 14px;border:1px solid var(--borda);border-radius:12px;background:rgba(255,255,255,.03)}
+.bb-resumo span{color:var(--mut)}
+.bb-ok p{color:var(--mut)}
+.bb-por{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}
+.bb-por div{padding:16px 18px;border:1px solid var(--borda);border-radius:16px;background:var(--card)}
+.bb-por b{color:#a5b4fc;margin-right:.4rem}
+.bb-rod{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem;margin-top:1.2rem;text-align:left}
+.bb-rod div{padding:12px 14px;border:1px solid var(--borda);border-radius:12px;background:var(--card)}
+.bb-rod .dm-link{color:var(--txt);padding:0;text-align:left}
+#demo-barbearia [id^=bb-]{scroll-margin-top:130px}
+@media(max-width:600px){#demo-barbearia .dm-topo{position:static}#demo-barbearia [id^=bb-]{scroll-margin-top:16px}#demo-barbearia .dm-barra .btn{padding:9px 16px;font-size:.78rem}}
+@media(max-width:700px){.bb-hero{grid-template-columns:1fr}.bb-poste{max-width:150px;font-size:3.6rem;order:-1}.bb-op{padding:12px}.bb-av{width:52px;height:52px;font-size:1.1rem}.bb-b{padding:12px 4px}}
+/* ===== DEMONSTRAÇÃO: INKFLOW — sistema para estúdio de tatuagem (mesma base .dm) ===== */
+.dm .btn[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
+.ik-logo{background:none;border:0;font:inherit;font-weight:800;font-size:1.3rem;letter-spacing:.14em;cursor:pointer;color:var(--txt);margin-right:auto;padding:4px 0}
+.ik-logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ik-nav{display:flex;gap:.3rem;overflow-x:auto;padding:0 0 10px;scrollbar-width:thin}
+.ik-nav button{flex:none;font:inherit;font-size:.86rem;padding:8px 14px;border-radius:999px;border:1px solid transparent;background:none;color:var(--mut);cursor:pointer;white-space:nowrap}
+.ik-nav button:hover{color:var(--txt)}
+.ik-nav button.on{background:var(--grad);color:#fff;box-shadow:0 6px 20px rgba(99,102,241,.35)}
+.ik-flow{margin:16px 0 0;padding:12px 16px;border:1px solid rgba(139,92,246,.45);border-radius:16px;background:rgba(139,92,246,.1);display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.88rem}
+.ik-flow .btn{padding:8px 14px;font-size:.74rem}
+.ik-seg{display:flex;gap:4px;margin:8px 0 0}.ik-seg i{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.1)}.ik-seg i.on{background:var(--grad)}
+.ik-main{padding-bottom:60px}
+.ik-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.ik-c{padding:16px 18px;border:1px solid var(--borda);border-radius:var(--r);background:var(--card);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.ik-c h3{font-size:1.05rem;margin-bottom:.5rem}
+.ik-mut{color:var(--mut);font-size:.9rem}
+.ik-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
+.ik-kpi b{display:block;font-size:1.6rem;margin-top:.2rem}.ik-kpi span{color:var(--mut);font-size:.82rem}
+.ik-kpi.hoje b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ik-home{text-align:center}.ik-home h1{max-width:none;font-size:clamp(2.4rem,8vw,4.4rem);letter-spacing:.12em;margin:.4rem auto .6rem}
+.ik-home p{margin-inline:auto}.ik-q{font-style:italic;color:#c4b5fd!important}
+.ik-chips{display:flex;gap:.5rem .9rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem;color:#c4b5fd;font-size:.92rem}
+.ik-chips2{display:flex;gap:.6rem;flex-wrap:wrap}
+.ik-chip{padding:7px 16px;border-radius:999px;border:1px solid var(--borda);background:var(--card);color:var(--txt);font:inherit;font-size:.85rem;cursor:pointer}
+.ik-chip:hover{border-color:var(--azul)}.ik-chip.on{background:var(--grad);border-color:transparent}
+.ik-w .vis{display:grid;place-items:center;height:110px;border-radius:14px;font-size:3rem;margin-bottom:.7rem;border:1px solid var(--borda);background:radial-gradient(circle at 50% 40%,rgba(139,92,246,.32),rgba(79,140,255,.08) 65%,transparent),rgba(255,255,255,.03)}
+.ik-w .btn{width:100%;margin-top:.8rem;font-size:.78rem;padding:10px}
+.ik-tag{display:inline-block;padding:3px 11px;border-radius:999px;background:var(--grad);font-size:.68rem;font-weight:800;letter-spacing:.1em}
+.ik-st{display:inline-block;padding:4px 12px;border-radius:999px;border:1px solid var(--borda);background:rgba(255,255,255,.04);font-size:.82rem;white-space:nowrap}
+.ik-prog{height:6px;border-radius:6px;background:rgba(255,255,255,.08);margin:0 0 1.3rem;overflow:hidden}.ik-prog i{display:block;height:100%;background:var(--grad)}
+.ik-ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem}
+.ik-op{display:flex;gap:.6rem;align-items:center;text-align:left;padding:13px 16px;border-radius:14px;border:1px solid var(--borda);background:rgba(255,255,255,.03);color:var(--txt);font:inherit;cursor:pointer;transition:.2s}
+.ik-op:hover{border-color:var(--azul)}.ik-op.on{border-color:transparent;background:var(--grad);box-shadow:0 8px 24px rgba(99,102,241,.35)}
+.ik-refs{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}
+.ik-ref{display:grid;place-items:center;width:78px;height:78px;border-radius:14px;border:1px solid rgba(139,92,246,.5);background:rgba(139,92,246,.14);font-size:1.8rem}
+.dm textarea,.dm input[type=text],.dm input[type=date],.dm input[type=number],.dm input[type=search]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--borda);background:rgba(255,255,255,.04);color:var(--txt);font:inherit}
+.dm textarea{min-height:110px;resize:vertical}
+.dm input:focus,.dm textarea:focus{outline:2px solid var(--azul);outline-offset:1px}
+.ik-f{display:grid;gap:.3rem;margin-bottom:.9rem}.ik-f label{font-size:.82rem;color:var(--mut)}
+.ik-lin{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.92rem}.ik-lin span{color:var(--mut)}
+.ik-tl{display:grid;gap:.5rem;margin:1rem 0}
+.ik-tl div{display:flex;gap:.7rem;align-items:center;padding:9px 12px;border-radius:12px;border:1px solid var(--borda);font-size:.88rem;color:var(--mut)}
+.ik-tl div.ok{color:var(--txt);border-color:rgba(139,92,246,.5);background:rgba(139,92,246,.1)}.ik-tl div.now{color:var(--txt);border-color:var(--azul)}
+.ik-big{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 1rem;border-radius:50%;background:var(--grad);font-size:2rem;font-weight:800;box-shadow:0 0 40px rgba(99,102,241,.5)}
+.ik-ctr{text-align:center}.ik-ctr .ik-lin{max-width:340px;margin:1rem auto;text-align:left}
+.ik-val{font-size:1.5rem;font-weight:800;color:#a5b4fc}
+.ik-tw{overflow-x:auto;border:1px solid var(--borda);border-radius:var(--r);background:var(--card)}
+.ik-t{width:100%;border-collapse:collapse;min-width:560px;font-size:.88rem}
+.ik-t th{text-align:left;color:var(--mut);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--borda)}.ik-t td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ik-t tr:last-child td{border:0}
+.ik-agw{overflow-x:auto;border:1px solid var(--borda);border-radius:var(--r);background:var(--card);margin-bottom:1rem}
+.ik-ag{display:grid;grid-template-rows:auto repeat(9,50px);gap:4px;padding:10px;min-width:580px}
+.ik-agh{text-align:center;font-weight:800;letter-spacing:.1em;font-size:.85rem;padding:6px}.ik-agh small{display:block;font-weight:400;color:var(--mut);letter-spacing:0}
+.ik-hr{grid-column:1;display:flex;align-items:center;font-size:.75rem;color:var(--mut)}
+.ik-free{border:1px dashed var(--borda);border-radius:10px;background:transparent;color:var(--mut);font:inherit;font-size:.78rem;cursor:pointer}
+.ik-free:hover,.ik-free.sel{border-color:var(--azul);color:var(--txt);background:rgba(79,140,255,.1)}
+.ik-bk{border-radius:10px;border:1px solid rgba(139,92,246,.5);background:rgba(139,92,246,.18);color:var(--txt);font:inherit;font-size:.78rem;text-align:left;padding:6px 9px;cursor:pointer;overflow:hidden}
+.ik-bk b{display:block;color:#c4b5fd;font-size:.72rem}.ik-bk small{display:block;color:var(--mut)}
+.ik-bk.blk{background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 6px,transparent 6px 12px);border-color:var(--borda)}
+.ik-bk.mine{background:var(--grad);border-color:transparent}.ik-bk.mine b,.ik-bk.mine small{color:#fff}
+.ik-bk.sel{outline:2px solid var(--azul)}
+.ik-bar{display:grid;grid-template-columns:90px 1fr 44px;align-items:center;gap:.7rem;margin:.6rem 0;font-size:.88rem}
+.ik-bar div{height:12px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}.ik-bar i{display:block;height:100%;border-radius:99px;background:var(--grad)}
+.ik-cols{display:flex;align-items:flex-end;gap:1rem;height:150px;margin-top:1rem}.ik-cols div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:.4rem;height:100%;font-size:.8rem;color:var(--mut)}
+.ik-cols i{display:block;width:100%;max-width:60px;border-radius:10px 10px 0 0;background:var(--grad)}
+.ik-bub{padding:10px 14px;border-radius:14px 14px 14px 4px;background:rgba(79,140,255,.14);border:1px solid rgba(79,140,255,.3);font-size:.9rem;margin-top:.7rem}
+.ik-modal{position:fixed;inset:0;z-index:330;display:grid;place-items:center;background:rgba(0,0,0,.65);padding:18px}.ik-md{width:min(420px,100%);padding:24px;border-radius:var(--r);border:1px solid var(--borda);background:#0b0d16;box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center}
+.ik-sel{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin:.8rem 0}
+.ik-l{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;width:100%;padding:13px 16px;border:1px solid var(--borda);border-radius:14px;background:var(--card);color:var(--txt);font:inherit;text-align:left;margin-bottom:.6rem}
+button.ik-l{cursor:pointer}button.ik-l:hover{border-color:var(--azul)}
+@media(max-width:600px){#demo-tatuagem .dm-topo{position:static}.ik-home h1{letter-spacing:.06em}.ik-bar{grid-template-columns:78px 1fr 40px}.ik-op{padding:12px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="topo">
+  <nav class="nav container" aria-label="Menu principal">
+    <a href="#inicio" class="logo">
+      <!-- FOTO DO CABEÇALHO: coloque sua foto em assets/images/perfil.jpg (o caminho está no src abaixo e em CONFIG.foto no script) -->
+      <span class="logo-foto sem-foto" id="logoFotoBox"><img id="logoFoto" src="assets/images/perfil.jpg" alt="Foto de Guilherme"></span>
+      <span class="logo-nome" data-cfg="nome">Guilherme Dev</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul class="menu" id="menu"></ul>
+  </nav>
+</header>
+
+<main id="conteudo">
+  <section id="inicio" class="hero container">
+    <div class="hero-txt">
+      <h1>Seu negócio merece estar na internet.</h1>
+      <p class="sub">Crio sites modernos, rápidos e personalizados para transformar visitantes em clientes.</p>
+      <div class="botoes">
+        <a class="btn btn-p" href="#como-funciona">🧠 Como funciona</a>
+        <a class="btn btn-p" href="#projetos">👀 Ver projetos</a>
+        <a class="btn btn-p" href="#tipos">🚀 Quero meu site</a>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="code glass" aria-hidden="true">
+      <div class="code-bar"><i></i><i></i><i></i><span class="st"><em>●</em> SISTEMA ONLINE</span></div>
+      <div class="code-sub"><em>●</em> projeto em desenvolvimento</div>
+      <div class="ed">
+        <div class="ed-top"><span>seu-site.js</span><span>2026</span></div>
+        <div class="cod">
+          <div class="l"><b class="ln">01</b><span><span class="c1">const</span> <span class="c2">site</span> = {</span></div>
+          <div class="l"><b class="ln">02</b><span>  <span class="c3">design</span>: <span class="c5">"personalizado"</span>,</span></div>
+          <div class="l"><b class="ln">03</b><span>  <span class="c3">performance</span>: <span class="c5">"rápida"</span>,</span></div>
+          <div class="l"><b class="ln">04</b><span>  <span class="c3">responsivo</span>: <span class="c2">true</span>,</span></div>
+          <div class="l"><b class="ln">05</b><span>  <span class="c3">whatsapp</span>: <span class="c2">true</span>,</span></div>
+          <div class="l"><b class="ln">06</b><span>  <span class="c3">projeto</span>: <span class="c5">"seu negócio"</span></span></div>
+          <div class="l"><b class="ln">07</b><span>};</span></div>
+          <div class="l"><b class="ln">08</b><span></span></div>
+          <div class="l"><b class="ln">09</b><span class="cm">// pronto para transformar visitantes em clientes</span></div>
+          <div class="l"><b class="ln">10</b><span><i class="cur"></i></span></div>
+        </div>
+        <div class="prog"><i></i></div>
+      </div>
+      <div class="code-rod">
+        <div class="chips"><b>HTML</b><b>CSS</b><b>JS</b></div>
+        <span class="ativo"><em>●</em> desenvolvimento ativo</span>
+      </div>
+      <div class="code-selo"><b>✓ Feito sob medida</b><span>para o seu negócio</span></div>
+    </div>
+  </section>
+
+  <section id="tipos" class="container sec">
+    <h2>Qual site você precisa?</h2>
+    <p class="sec-sub">Escolha o tipo, clique e fale comigo direto no WhatsApp.</p>
+    <div class="grid" id="tipos-grid"></div>
+  </section>
+
+  <section id="projetos" class="container sec">
+    <h2>Meus projetos</h2>
+    <p class="sec-sub">Conheça alguns dos projetos que desenvolvi.</p>
+    <div class="grid" id="projetos-grid"></div>
+  </section>
+
+  <section id="como-funciona" class="container sec">
+    <h2>Como funciona</h2>
+    <p class="sec-sub">Do primeiro contato até o site no ar, em 4 passos.</p>
+    <ol class="grid g4 etapas" id="etapas"></ol>
+  </section>
+
+  <section id="planos" class="container sec">
+    <h2>Planos</h2>
+    <p class="sec-sub">Do básico ao sistema completo.</p>
+    <div class="grid g3" id="planos-grid"></div>
+  </section>
+
+  <section id="servicos" class="container sec">
+    <h2>Meus serviços</h2>
+    <p class="sec-sub">Preços claros para você saber quanto investir.</p>
+    <div class="grid g4" id="servicos-grid"></div>
+  </section>
+
+  <section id="porque" class="container sec">
+    <h2>Por que escolher meu trabalho?</h2>
+    <div class="grid g4" id="porque-grid"></div>
+  </section>
+
+  <section class="container sec">
+    <div class="destaque glass">
+      <h2>🚀 SITE PROFISSIONAL</h2>
+      <p class="sec-sub" id="dest-sub"></p>
+      <p class="preco" id="dest-preco"></p>
+      <ul class="lista" id="dest-lista"></ul>
+      <a class="btn btn-p" href="#" id="dest-btn"></a>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="container sec">
+    <h2>Depoimentos</h2>
+    <p class="sec-sub">Em breve, aqui ficarão depoimentos de clientes reais.</p>
+    <div class="grid g3" id="depo-grid"></div>
+  </section>
+
+  <section id="sobre" class="container sec sobre">
+    <div>
+      <h2>Sobre mim</h2>
+      <p>Olá, eu sou Guilherme, desenvolvedor web e estudante de Análise e Desenvolvimento de Sistemas.</p>
+      <p>Meu objetivo é criar sites modernos, rápidos, responsivos e personalizados para empresas, profissionais e pequenos negócios.</p>
+      <p class="muted">Estudante de Análise e Desenvolvimento de Sistemas — UNINASSAU.</p>
+    </div>
+    <div>
+      <h3>Tecnologias que utilizo</h3>
+      <div class="techs" id="techs"></div>
+    </div>
+  </section>
+
+  <section id="contato" class="container sec">
+    <div class="contato glass">
+      <h2>Vamos criar seu próximo projeto?</h2>
+      <p class="sec-sub">Conte-me o que você precisa e vamos conversar sobre seu projeto.</p>
+      <form id="form" novalidate>
+        <div class="campo"><label for="f-nome">Nome</label><input id="f-nome" name="nome" required autocomplete="name"></div>
+        <div class="campo"><label for="f-wpp">WhatsApp</label><input id="f-wpp" name="wpp" type="tel" required autocomplete="tel"></div>
+        <div class="campo"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="campo"><label for="f-tipo">Tipo de projeto</label><select id="f-tipo" name="tipo" required></select></div>
+        <div class="campo full"><label for="f-msg">Mensagem</label><textarea id="f-msg" name="msg" rows="4"></textarea></div>
+        <p class="erro" id="erro" role="alert"></p>
+        <button class="btn btn-p full" type="submit">Solicitar orçamento</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="container foot">
+    <div><strong data-cfg="nome">Guilherme Dev</strong><p class="muted">Desenvolvimento Web</p><p class="muted">HTML • CSS • JavaScript</p></div>
+    <ul class="flinks" id="flinks"></ul>
+    <div><a href="#" data-wpp="geral">WhatsApp</a><br><a href="#" id="f-mail">E-mail</a></div>
+  </div>
+  <p class="copy" id="copy"></p>
+</footer>
+
+<a class="flutuante" href="#" data-wpp="geral" aria-label="Falar comigo no WhatsApp">💬 Falar comigo</a>
+
+<!-- DEMONSTRAÇÃO LOJA VIRTUAL (abre ao clicar em "QUERO ESTE SITE" no card Loja Virtual) -->
+<div class="dm" id="demo-loja" role="dialog" aria-modal="true" aria-label="Demonstração de loja virtual VITRINE" tabindex="-1" hidden>
+  <div id="dm-loja">
+    <div class="dm-aviso"><span>✨ Demonstração interativa de uma loja virtual — produtos e preços são exemplos.</span><button class="btn btn-p" type="button" data-dm="quero">QUERO UMA LOJA ASSIM</button></div>
+    <header class="dm-topo"><div class="dm-wrap"><div class="dm-barra">
+      <button class="dm-voltar" type="button" data-dm="voltar">← Voltar ao portfólio</button>
+      <span class="dm-logo">VITRINE</span>
+      <nav class="dm-nav" aria-label="Menu da loja"><a data-go="dm-topo-loja">Início</a><a data-go="dm-produtos">Produtos</a><a data-go="dm-ofertas">Ofertas</a><a data-go="dm-contato">Contato</a></nav>
+      <button class="dm-sac" type="button" data-dm="sacola">🛍️ Sacola (<span id="dm-n">0</span>)</button>
+    </div></div></header>
+    <div class="dm-wrap" id="dm-topo-loja">
+      <section class="dm-banner">
+        <span class="dm-tag">NOVIDADES CHEGARAM</span>
+        <h1>Tudo o que você procura, em um só lugar.</h1>
+        <p>Explore nossa seleção de produtos para o seu dia a dia.</p>
+        <button class="btn btn-p" type="button" data-go="dm-produtos">VER PRODUTOS</button>
+      </section>
+      <h2>Categorias</h2>
+      <div class="dm-cats" id="dm-cats"></div>
+      <h2 id="dm-produtos"><span id="dm-titulo">Produtos em destaque</span></h2>
+      <div class="dm-grid" id="dm-grid"></div>
+      <h2 id="dm-ofertas">Ofertas</h2>
+      <div class="dm-ofertas"><div class="dm-of"><b>Frete grátis</b>em compras acima de R$ 150,00</div><div class="dm-of"><b>10% OFF no PIX</b>na primeira compra</div><div class="dm-of"><b>Até 6x sem juros</b>no cartão de crédito</div></div>
+      <section class="dm-cta">
+        <h2>Gostou da experiência?</h2>
+        <p>Sua loja pode ter exatamente esse nível: sacola, categorias e pedido direto no WhatsApp.</p>
+        <button class="btn btn-p" type="button" data-dm="quero">QUERO UMA LOJA ASSIM</button>
+      </section>
+      <footer class="dm-fim" id="dm-contato"><b>VITRINE</b> — loja fictícia de demonstração.<br>Atendimento pelo WhatsApp: use a sacola para finalizar seu pedido de teste.
+        <div class="dm-acoes"><button class="dm-voltar" type="button" data-dm="voltar">← Voltar ao portfólio</button></div></footer>
+    </div>
+  </div>
+  <div id="dm-apres" hidden>
+    <div class="dm-ap">
+      <button class="dm-voltar" type="button" data-dm="loja">← Voltar à loja</button>
+      <span class="dm-tag" style="margin-top:1.4rem">COMO FUNCIONA</span>
+      <h1>Como criamos o seu site, passo a passo</h1>
+      <p>Um processo simples e transparente, do primeiro contato até o site no ar.</p>
+      <div class="dm-etapas">
+        <div class="dm-et"><b class="n">1</b><span>Conversamos sobre o negócio e o que o cliente precisa.</span></div>
+        <div class="dm-et"><b class="n">2</b><span>Definimos o visual e as funcionalidades.</span></div>
+        <div class="dm-et"><b class="n">3</b><span>Desenvolvo o site.</span></div>
+        <div class="dm-et"><b class="n">4</b><span>Apresento o resultado para aprovação.</span></div>
+        <div class="dm-et"><b class="n">5</b><span>Depois, combinamos a publicação.</span></div>
+      </div>
+      <div class="dm-acoes" style="margin-top:2rem"><button class="btn btn-p" type="button" data-dm="comecar">QUERO COMEÇAR MEU PROJETO</button></div>
+      <div class="dm-acoes"><button class="dm-voltar" type="button" data-dm="voltar">← Voltar ao portfólio</button></div>
+    </div>
+  </div>
+  <div class="dm-fundo" id="dm-fundo" hidden></div>
+  <aside class="dm-gaveta" id="dm-gaveta" aria-label="Sacola de compras" hidden>
+    <div class="dm-gh"><h2>🛍️ Sua sacola</h2><button class="dm-x" type="button" data-dm="fechar" aria-label="Fechar sacola">×</button></div>
+    <div class="dm-itens" id="dm-itens"></div>
+    <div class="dm-gf">
+      <div class="dm-tot"><span>Total</span><span id="dm-total">R$ 0,00</span></div>
+      <button class="btn btn-p" type="button" data-dm="pedido">FINALIZAR PELO WHATSAPP</button>
+      <button class="btn btn-s" type="button" data-dm="quero">QUERO UMA LOJA ASSIM</button>
+    </div>
+  </aside>
+</div>
+
+<!-- DEMONSTRAÇÃO BARBEARIA (abre ao clicar em "QUERO ESTE SITE" no card Site para Barbearia) -->
+<div class="dm" id="demo-barbearia" role="dialog" aria-modal="true" aria-label="Demonstração de site para barbearia BARBER CLUB" tabindex="-1" hidden>
+  <div class="dm-aviso"><span>✨ Demonstração interativa de um site para barbearia — dados e preços são exemplos.</span></div>
+  <header class="dm-topo"><div class="dm-wrap"><div class="dm-barra">
+    <button class="dm-voltar" type="button" data-bb="voltar">← VOLTAR AO PORTFÓLIO</button>
+    <span class="bb-logo"><span aria-hidden="true">💈</span><span class="dm-logo">BARBER CLUB</span></span>
+    <nav class="dm-nav" aria-label="Menu da barbearia"><a data-go="bb-topo">Início</a><a data-go="bb-servicos">Serviços</a><a data-go="bb-sobre">Sobre</a><a data-go="bb-contato">Contato</a></nav>
+    <button class="btn btn-p" type="button" data-go="bb-agendar">AGENDAR HORÁRIO</button>
+  </div></div></header>
+  <div class="dm-wrap" id="bb-topo">
+    <section class="dm-banner bb-hero">
+      <div>
+        <span class="dm-tag">ESTILO • PRECISÃO • ATITUDE</span>
+        <h1>SEU ESTILO.<br><em>NOSSO TRABALHO.</em></h1>
+        <p>Corte impecável, barba alinhada e aquele visual que combina com você.</p>
+        <button class="btn btn-p" type="button" data-go="bb-agendar">AGENDAR AGORA</button>
+        <div class="bb-checks"><span>✓ Atendimento profissional</span><span>✓ Ambiente moderno</span><span>✓ Horários flexíveis</span></div>
+      </div>
+      <div class="bb-poste" aria-hidden="true">💈</div>
+    </section>
+    <h2 id="bb-servicos">Serviços</h2>
+    <div class="dm-grid bb-svc" id="bb-svcs"></div>
+    <h2 id="bb-agendar">Agende seu horário</h2>
+    <div class="bb-wiz" id="bb-wiz"></div>
+    <h2 id="bb-sobre">POR QUE ESCOLHER A BARBER CLUB?</h2>
+    <div class="bb-por"><div><b>✓</b>Profissionais especializados</div><div><b>✓</b>Atendimento personalizado</div><div><b>✓</b>Ambiente moderno</div><div><b>✓</b>Agendamento fácil</div><div><b>✓</b>Cuidado com cada detalhe</div></div>
+    <section class="dm-cta">
+      <h2>SEU VISUAL COMEÇA AQUI.</h2>
+      <p>Agende seu próximo horário e saia com o estilo renovado.</p>
+      <button class="btn btn-p" type="button" data-bb="wpp">AGENDAR PELO WHATSAPP</button>
+    </section>
+    <footer class="dm-fim" id="bb-contato"><b>BARBER CLUB</b><br>Estilo • Precisão • Atitude
+      <div class="bb-rod">
+        <div>📍 Localização<br><small>Endereço de exemplo</small></div>
+        <div>🕐 Horários de atendimento<br><small>Seg a Sáb, 09:00 às 17:00</small></div>
+        <div>📱 <button class="dm-link" type="button" data-bb="wpp">WhatsApp</button></div>
+        <div>📸 Instagram<br><small>@barberclub (exemplo)</small></div>
+      </div>
+      <div class="dm-acoes"><button class="dm-voltar" type="button" data-bb="voltar">← VOLTAR AO PORTFÓLIO</button></div></footer>
+  </div>
+</div>
+
+<!-- DEMONSTRAÇÃO INKFLOW (abre ao clicar em "QUERO ESTE SITE" no card Site para Tatuador) -->
+<div class="dm" id="demo-tatuagem" role="dialog" aria-modal="true" aria-label="Demonstração INKFLOW, sistema para estúdio de tatuagem" tabindex="-1" hidden>
+  <div id="ik-app"></div>
+</div>
+<script>
+/* =====================================================
+   CONFIGURAÇÕES DO SITE  (tudo que você pode querer alterar)
+   ===================================================== */
+const CONFIG = {
+  nome: "Guilherme Dev",            // ALTERE SEU NOME AQUI
+  foto: "assets/images/perfil.jpg", // CAMINHO DA SUA FOTO (coloque o arquivo em assets/images/perfil.jpg)
+  whatsapp: "5579981710947",        // ALTERE SEU WHATSAPP AQUI (55 + DDD + número, só números)
+  email: "SEU_EMAIL_AQUI",          // ALTERE SEU E-MAIL AQUI
+  profissao: "Desenvolvimento Web",
+  instagram: "SEU_INSTAGRAM_AQUI",
+  github: "SEU_GITHUB_AQUI",
+  ano: "2026",
+  mensagemGeral: "Olá! Vi seu site e gostaria de solicitar um orçamento para um projeto."
+};
+
+// Números da home. ALTERE OS VALORES AQUI quando tiver números reais (ex.: "+5").
+const estatisticas = [
+  { valor: "6", rotulo: "projetos desenvolvidos" },
+  { valor: "9", rotulo: "clientes atendidos" },
+  { valor: "100%", rotulo: "responsivo" }
+];
+
+// Menu e links do rodapé
+const menu = [
+  ["Início", "#inicio"], ["Projetos", "#projetos"], ["Como funciona", "#como-funciona"],
+  ["Planos", "#planos"], ["Serviços", "#servicos"], ["Sobre mim", "#sobre"], ["Contato", "#contato"],
+  ["⚙ Configuração", "#configuracao"]   // acesso do administrador (pede senha)
+];
+const linksRodape = [["Início", "#inicio"], ["Serviços", "#servicos"], ["Projetos", "#projetos"], ["Planos", "#planos"], ["Contato", "#contato"]];
+
+// "Qual site você precisa?"  — ADICIONE NOVO TIPO DE SITE AQUI
+const tiposDeSite = [
+  { icone: "🛒", nome: "Loja Virtual", demo: "loja", descricao: "Venda seus produtos pela internet com uma loja moderna e profissional." },
+  { icone: "💈", nome: "Site para Barbearia", demo: "barbearia", descricao: "Mostre seus serviços, localização e facilite o contato com seus clientes." },
+  { icone: "🎨", nome: "Site para Tatuador", demo: "tatuagem", descricao: "Mostre seus trabalhos, portfólio e facilite o agendamento." },
+  { icone: "🍽️", nome: "Site para Restaurante", descricao: "Apresente seu restaurante, cardápio, localização e WhatsApp." },
+  { icone: "🏢", nome: "Site para Empresa", descricao: "Apresente sua empresa de forma profissional na internet." },
+  { icone: "📄", nome: "Landing Page", descricao: "Uma página focada em apresentar seu produto, serviço ou negócio." }
+];
+
+// ADICIONE NOVO SERVIÇO AQUI
+const servicos = [
+  { nome: "Landing Page", preco: "A partir de R$ 500", // ALTERE O PREÇO AQUI
+    descricao: "Página profissional para apresentar seu negócio, produto ou serviço.",
+    botao: "Quero este serviço",
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse em criar uma Landing Page. Gostaria de saber mais sobre o orçamento." },
+  { nome: "Site Profissional", preco: "A partir de R$ 1.000", // ALTERE O PREÇO AQUI
+    descricao: "Site completo para empresas e profissionais.",
+    botao: "Quero este serviço",
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse em criar um Site Profissional. Gostaria de saber mais sobre o orçamento." },
+  { nome: "Loja Virtual", preco: "A partir de R$ 2.000", // ALTERE O PREÇO AQUI
+    descricao: "Loja virtual personalizada para vender produtos pela internet.",
+    botao: "Quero este serviço",
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse em criar uma Loja Virtual. Gostaria de saber mais sobre o orçamento." },
+  { nome: "Sistema Web", preco: "Solicite um orçamento", // ALTERE O PREÇO AQUI
+    descricao: "Sistemas personalizados de acordo com as necessidades do seu negócio.",
+    botao: "Solicitar orçamento",
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse em um Sistema Web. Gostaria de solicitar um orçamento." }
+];
+
+// ADICIONE NOVO PLANO AQUI  (destaque: true = card em destaque)
+const planos = [
+  { nome: "Plano Básico", preco: "R$ 500", destaque: false, botao: "ESCOLHER PLANO", // ALTERE O PREÇO AQUI
+    itens: ["Landing Page", "Design responsivo", "HTML", "CSS", "Botão WhatsApp", "Formulário de contato"],
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse no Plano Básico. Gostaria de saber mais." },
+  { nome: "Plano Profissional", preco: "R$ 1.000", destaque: true, selo: "⭐ MAIS ESCOLHIDO", botao: "ESCOLHER PLANO", // ALTERE O PREÇO AQUI
+    itens: ["Site completo", "Design personalizado", "Responsivo", "HTML", "CSS", "JavaScript", "WhatsApp", "Formulário de contato", "Até 5 páginas"],
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse no Plano Profissional. Gostaria de saber mais." },
+  { nome: "Plano Premium", preco: "R$ 2.000+", destaque: false, botao: "SOLICITAR ORÇAMENTO", // ALTERE O PREÇO AQUI
+    itens: ["Site completo", "Design personalizado", "JavaScript", "Loja virtual ou sistema", "Integrações", "Responsividade", "Suporte", "Funcionalidades personalizadas"],
+    mensagemWhatsapp: "Olá! Vi seu site e tenho interesse no Plano Premium. Gostaria de solicitar um orçamento." }
+];
+
+// ADICIONE NOVO PROJETO AQUI  (copie um bloco { ... }, cole abaixo e edite)
+// dispositivo: "notebook" ou "celular"
+const projetos = [
+  { nome: "Loja Esportiva", dispositivo: "notebook",
+    imagem: "images/projeto1.jpg",            // ALTERE A IMAGEM AQUI
+    descricao: "Loja virtual com vitrine de produtos e carrinho.",
+    tecnologias: ["HTML", "CSS", "JavaScript"],
+    link: "#" },                               // ALTERE O LINK DO PROJETO AQUI
+  { nome: "Site para Tatuador", dispositivo: "celular",
+    imagem: "images/projeto2.jpg",
+    descricao: "Portfólio de trabalhos e contato para agendamento.",
+    tecnologias: ["HTML", "CSS", "JavaScript"],
+    link: "#" },
+  { nome: "Site para Restaurante", dispositivo: "notebook",
+    imagem: "images/projeto3.jpg",
+    descricao: "Cardápio, localização e pedidos pelo WhatsApp.",
+    tecnologias: ["HTML", "CSS", "JavaScript"],
+    link: "#" },
+  { nome: "Landing Page", dispositivo: "notebook",
+    imagem: "images/projeto4.jpg",
+    descricao: "Página focada em conversão para apresentar um serviço.",
+    tecnologias: ["HTML", "CSS", "JavaScript"],
+    link: "#" },
+  { nome: "Sistema de Cadastro", dispositivo: "celular",
+    imagem: "images/projeto5.jpg",
+    descricao: "Sistema para cadastrar e listar informações.",
+    tecnologias: ["HTML", "CSS", "JavaScript"],
+    link: "#" }
+];
+
+const diferenciais = [
+  ["🎨", "Design moderno"], ["📱", "Sites responsivos"], ["🧩", "Código organizado"], ["🛠️", "Projeto personalizado"],
+  ["💬", "Integração com WhatsApp"], ["🤝", "Atendimento direto"], ["🎯", "Soluções pensadas para o negócio"]
+];
+
+const etapas = [
+  ["💡", "Você explica sua ideia"], ["🧮", "Eu faço o orçamento"], ["💻", "Eu desenvolvo seu site"], ["🎁", "Você recebe seu projeto"]
+];
+
+// ADICIONE NOVA TECNOLOGIA AQUI
+const tecnologias = [
+  { icone: "🟧", nome: "HTML5" }, { icone: "🟦", nome: "CSS3" }, { icone: "🟨", nome: "JavaScript" }
+];
+
+// Seção "Site Profissional"
+const destaque = {
+  subtitulo: "Tenha seu negócio presente na internet.",
+  preco: "A partir de R$ 1.000",            // ALTERE O PREÇO AQUI
+  itens: ["Design moderno", "Responsivo", "WhatsApp", "Formulário", "Até 5 páginas", "Desenvolvimento personalizado"],
+  botao: "QUERO MEU SITE",
+  mensagemWhatsapp: "Olá! Vi seu site e tenho interesse em um Site Profissional. Gostaria de saber mais sobre o orçamento."
+};
+
+// SUBSTITUA POR DEPOIMENTOS REAIS quando tiver (e troque "exemplo" para false)
+const depoimentos = [
+  { exemplo: true, nome: "Nome do cliente", texto: "Aqui ficará o depoimento de um cliente real sobre o seu trabalho." },
+  { exemplo: true, nome: "Nome do cliente", texto: "Aqui ficará o depoimento de um cliente real sobre o seu trabalho." },
+  { exemplo: true, nome: "Nome do cliente", texto: "Aqui ficará o depoimento de um cliente real sobre o seu trabalho." }
+];
+
+/* =====================================================
+   CÓDIGO DO SITE — normalmente você NÃO precisa mexer daqui para baixo
+   ===================================================== */
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const linkWpp = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+const wppBtn = (msg) => `href="${linkWpp(msg)}" target="_blank" rel="noopener noreferrer"`;
+// Botão "Falar comigo" no celular: tenta abrir o app do WhatsApp direto; se não abrir, usa o link wa.me normal (linkWpp).
+// No computador não faz nada: o link já montado continua funcionando como antes.
+function abrirWhatsApp(ev) {
+  if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+  ev.preventDefault();
+  const web = linkWpp(CONFIG.mensagemGeral);                                                   // https://wa.me/NUMERO?text=...
+  const app = web.replace("https://wa.me/", "whatsapp://send?phone=").replace("?text=", "&text=");   // mesmo número e mesma mensagem
+  let abriu = false;
+  const marca = () => { abriu = true; };                                                       // a página saiu de cena = o app abriu
+  document.addEventListener("visibilitychange", marca, { once: true });
+  window.addEventListener("pagehide", marca, { once: true });
+  window.addEventListener("blur", marca, { once: true });
+  window.location.href = app;
+  setTimeout(() => { if (!abriu && !document.hidden) window.location.href = web; }, 1500);     // app não abriu: cai no wa.me
+}
+const lista = (itens) => itens.map((i) => `<li>${esc(i)}</li>`).join("");
+
+function render() {
+  /* ---- FOTO DO CABEÇALHO (a própria bolinha é o botão) ----
+     Clique na bolinha -> abre o seletor de arquivos (JPG, JPEG, PNG, WEBP) -> a imagem aparece na hora.
+     A foto escolhida fica salva neste navegador (localStorage). Sem foto escolhida, usa CONFIG.foto (assets/images/perfil.jpg). */
+  const logoFoto = document.getElementById("logoFoto"), logoBox = document.getElementById("logoFotoBox");
+  if (logoFoto && logoBox) {
+    const CHAVE_FOTO = "fotoPerfilGuilherme";
+    const ler = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+    const gravar = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
+
+    // mostra a imagem só quando ela carrega; se falhar, fica só o círculo vazio (sem ícone quebrado)
+    logoFoto.addEventListener("load", () => logoBox.classList.remove("sem-foto"));
+    logoFoto.addEventListener("error", () => logoBox.classList.add("sem-foto"));
+    const usarFoto = (src) => { logoBox.classList.add("sem-foto"); logoFoto.src = src; };
+
+    const salva = ler(CHAVE_FOTO);
+    if (salva) usarFoto(salva);
+    else if (logoFoto.complete && logoFoto.naturalWidth > 0) logoBox.classList.remove("sem-foto");
+
+    // input de arquivo escondido, disparado pela bolinha
+    const entrada = document.createElement("input");
+    entrada.type = "file"; entrada.accept = ".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"; entrada.hidden = true;
+    document.body.appendChild(entrada);
+
+    logoBox.setAttribute("role", "button"); logoBox.tabIndex = 0;
+    logoBox.title = "Clique para trocar a foto";
+    logoBox.setAttribute("aria-label", "Trocar foto do perfil");
+    const abrir = (ev) => { ev.preventDefault(); ev.stopPropagation(); entrada.click(); };   // não deixa o link do logo rolar a página
+    logoBox.addEventListener("click", abrir);
+    logoBox.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") abrir(ev); });
+
+    entrada.addEventListener("change", () => {
+      const arq = entrada.files && entrada.files[0];
+      entrada.value = "";                                   // permite escolher o mesmo arquivo de novo
+      if (!arq) return;
+      if (!/^image\/(jpeg|png|webp)$/.test(arq.type) && !/\.(jpe?g|png|webp)$/i.test(arq.name)) { alert("Escolha uma imagem JPG, JPEG, PNG ou WEBP."); return; }
+      const leitor = new FileReader();
+      leitor.onload = () => {
+        usarFoto(leitor.result);                            // aparece imediatamente, substituindo a anterior
+        // versão reduzida (256px, recorte quadrado central) para guardar no navegador sem estourar o limite
+        const img = new Image();
+        img.onload = () => {
+          const t = 256, lado = Math.min(img.naturalWidth, img.naturalHeight), c = document.createElement("canvas");
+          c.width = c.height = t;
+          const cx = c.getContext("2d");
+          cx.drawImage(img, (img.naturalWidth - lado) / 2, (img.naturalHeight - lado) / 2, lado, lado, 0, 0, t, t);
+          gravar(CHAVE_FOTO, c.toDataURL("image/png"));
+        };
+        img.src = leitor.result;
+      };
+      leitor.onerror = () => alert("Não foi possível ler essa imagem. Tente outro arquivo.");
+      leitor.readAsDataURL(arq);
+    });
+  }
+  document.querySelectorAll("[data-cfg=nome]").forEach((e) => (e.textContent = CONFIG.nome));
+  $("#menu").innerHTML = menu.map(([t, h]) => `<li><a href="${h}">${t}</a></li>`).join("");
+  $("#flinks").innerHTML = linksRodape.map(([t, h]) => `<li><a href="${h}">${t}</a></li>`).join("");
+  $("#stats").innerHTML = estatisticas.map((s) => `<div><b>${esc(s.valor)}</b><span>${esc(s.rotulo)}</span></div>`).join("");
+
+  $("#tipos-grid").innerHTML = tiposDeSite.map((t) => `
+    <article class="card glass rv"><span class="ico" aria-hidden="true">${t.icone}</span><h3>${esc(t.nome)}</h3><p>${esc(t.descricao)}</p>
+    <a class="btn btn-p" ${t.demo ? `href="#" data-demo="${t.demo}"` : wppBtn(`Olá! Vi seu site e tenho interesse em: ${t.nome}. Gostaria de saber mais sobre o orçamento.`)}>QUERO ESTE SITE</a></article>`).join("");
+
+  $("#servicos-grid").innerHTML = servicos.map((s) => `
+    <article class="card glass rv"><h3>${esc(s.nome)}</h3><p class="preco">${esc(s.preco)}</p><p>${esc(s.descricao)}</p>
+    <a class="btn btn-s" ${wppBtn(s.mensagemWhatsapp)}>${esc(s.botao)}</a></article>`).join("");
+
+  $("#projetos-grid").innerHTML = projetos.map((p) => `
+    <article class="proj glass rv">
+      <div class="dev ${p.dispositivo === "celular" ? "celular" : "notebook"}"><span>${esc(p.nome)}</span>
+        <img src="${esc(p.imagem)}" alt="Imagem do projeto ${esc(p.nome)}" loading="lazy" onerror="this.remove()"></div>
+      <h3>${esc(p.nome)}</h3><p class="muted">${esc(p.descricao)}</p>
+      <div class="tags">${p.tecnologias.map((t) => `<b>${esc(t)}</b>`).join("")}</div>
+      <a class="btn btn-s" href="${esc(p.link)}" target="_blank" rel="noopener noreferrer">Ver projeto</a></article>`).join("");
+
+  $("#planos-grid").innerHTML = planos.map((p) => `
+    <article class="card glass plano rv ${p.destaque ? "top" : ""}">${p.destaque ? `<span class="selo">${esc(p.selo)}</span>` : ""}
+    <h3>${esc(p.nome)}</h3><p class="preco">${esc(p.preco)}</p><ul class="lista">${lista(p.itens)}</ul>
+    <a class="btn ${p.destaque ? "btn-p" : "btn-s"}" ${wppBtn(p.mensagemWhatsapp)}>${esc(p.botao)}</a></article>`).join("");
+
+  $("#porque-grid").innerHTML = diferenciais.map(([i, t]) => `<article class="card glass rv"><span class="ico" aria-hidden="true">${i}</span><h3>✓ ${esc(t)}</h3></article>`).join("");
+  $("#etapas").innerHTML = etapas.map(([i, t], n) => `<li class="card glass rv"><span class="num">0${n + 1}</span><span class="ico" aria-hidden="true">${i}</span><h3>${esc(t)}</h3></li>`).join("");
+  $("#techs").innerHTML = tecnologias.map((t) => `<div><span aria-hidden="true">${t.icone}</span><b>${esc(t.nome)}</b></div>`).join("");
+
+  $("#dest-sub").textContent = destaque.subtitulo;
+  $("#dest-preco").textContent = destaque.preco;
+  $("#dest-lista").innerHTML = lista(destaque.itens);
+  const db = $("#dest-btn");
+  db.textContent = destaque.botao; db.href = linkWpp(destaque.mensagemWhatsapp); db.target = "_blank"; db.rel = "noopener noreferrer";
+
+  $("#depo-grid").innerHTML = depoimentos.map((d) => `
+    <figure class="card glass depo rv">${d.exemplo ? "<small>Exemplo de depoimento</small>" : ""}
+    <blockquote><p>“${esc(d.texto)}”</p></blockquote><figcaption>— ${esc(d.nome)}</figcaption></figure>`).join("");
+
+  $("#f-tipo").innerHTML = '<option value="">Selecione...</option>' +
+    [...tiposDeSite.map((t) => t.nome), ...servicos.map((s) => s.nome), "Outro"].filter((v, i, a) => a.indexOf(v) === i).map((n) => `<option>${esc(n)}</option>`).join("");
+
+  document.querySelectorAll("[data-wpp=geral]").forEach((a) => { a.href = linkWpp(CONFIG.mensagemGeral); a.target = "_blank"; a.rel = "noopener noreferrer"; });
+  const falarComigo = document.querySelector(".flutuante"); if (falarComigo) falarComigo.addEventListener("click", abrirWhatsApp);
+  const mail = $("#f-mail");
+  mail.href = `mailto:${CONFIG.email}`; mail.textContent = CONFIG.email;
+  $("#copy").textContent = `© ${CONFIG.ano} ${CONFIG.nome}. Todos os direitos reservados.`;
+}
+
+function iniciarMenu() {
+  const b = $("#burger"), m = $("#menu");
+  const fechar = () => { m.classList.remove("aberto"); b.setAttribute("aria-expanded", "false"); };
+  b.addEventListener("click", () => { const a = m.classList.toggle("aberto"); b.setAttribute("aria-expanded", a); });
+  m.addEventListener("click", (e) => e.target.tagName === "A" && fechar());
+  document.addEventListener("keydown", (e) => e.key === "Escape" && fechar());
+}
+
+function iniciarFormulario() {
+  $("#form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = e.target, v = (n) => f.elements[n].value.trim();
+    if (!v("nome") || !v("wpp") || !v("tipo")) { $("#erro").textContent = "Preencha nome, WhatsApp e tipo de projeto."; return; }
+    $("#erro").textContent = "";
+    const msg = `Olá! Meu nome é ${v("nome")}.\nTipo de projeto: ${v("tipo")}\nWhatsApp: ${v("wpp")}` +
+      (v("email") ? `\nE-mail: ${v("email")}` : "") + (v("msg") ? `\nMensagem: ${v("msg")}` : "") + "\nGostaria de solicitar um orçamento.";
+    window.open(linkWpp(msg), "_blank", "noopener");
+  });
+}
+
+function iniciarAnimacoes() {
+  const els = document.querySelectorAll(".rv");
+  if (!("IntersectionObserver" in window)) return els.forEach((e) => e.classList.add("on"));
+  const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("on"); io.unobserve(x.target); } }), { threshold: 0.12 });
+  els.forEach((e) => io.observe(e));
+}
+
+render();
+iniciarMenu();
+iniciarFormulario();
+iniciarAnimacoes();
+/* =====================================================
+   CHUVA DE CÓDIGO no fundo da seção Início
+   (colunas de códigos que descem sem parar; ao chegar embaixo, o conteúdo é renovado)
+   Para ajustar: velocidade = DURACAO, quantidade = colunas, textos = TRECHOS, cores = CORES.
+   Frases de cada seção que caem misturadas aos códigos: FRASES_POR_SECAO (a chave é o ID da seção).
+   ===================================================== */
+(function chuvaDeCodigo() {
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const TRECHOS = [
+    "<div>", "</div>", "<section>", "<h1>", "</h1>", "<a href=\"#\">", "<img src=\"\">", "<button>", "<!DOCTYPE html>",
+    "const site = {}", "function iniciar() {}", "let pronto = true;", "return site;", "=> { }", "async () => {}", "document.querySelector()", "addEventListener()", "fetch(url)", "console.log()", "import { app }",
+    "HTML", "CSS", "JavaScript", "Node.js", "API", "</>", "{ }", "[ ]", "&&", "===", "0101", "npm run dev", "git commit",
+    "color: #8b5cf6;", "display: flex;", "display: grid;", "gap: 1rem;", "padding: 0;", "border-radius: 50%;", "opacity: 1;", "position: absolute;", "transform: none;",
+    "responsive: true;", "mobile: true;", "seo: \"ok\";", "animation: ...", "@media (max-width)", "@keyframes", ":root { }", "z-index: 1;"
+  ];
+  const CORES = ["#4f8cff", "#8b5cf6", "#38bdf8", "#22d3ee", "#7aa2ff", "#a78bfa", "#60a5fa"];
+  const CABECA = ["#7dd3fc", "#67e8f9", "#a5b4fc", "#c4b5fd"];       // linha da frente (mais brilhante)
+  const DURACAO = [14, 34];                                          // segundos que cada coluna leva para atravessar (velocidades diferentes)
+  // Frases que caem junto com os códigos, uma lista por seção (chave = ID da seção). Edite à vontade.
+  const FRASES_POR_SECAO = {
+    "inicio": ["SITE MODERNO", "DESENVOLVIMENTO WEB", "RESPONSIVO", "SEU NEGÓCIO ONLINE"],
+    "servicos": ["LANDING PAGE", "SITE PROFISSIONAL", "LOJA VIRTUAL", "SISTEMA WEB"],
+    "projetos": ["LOJA ESPORTIVA", "SITE PARA TATUADOR", "SITE PARA RESTAURANTE", "LANDING PAGE", "SISTEMA DE CADASTRO"],
+    "planos": ["PLANO BÁSICO", "PLANO PROFISSIONAL", "PLANO PREMIUM", "R$ 500", "R$ 1.000", "R$ 2.000+"],
+    "como-funciona": ["VOCÊ EXPLICA SUA IDEIA", "EU FAÇO O ORÇAMENTO", "EU DESENVOLVO SEU SITE", "VOCÊ RECEBE SEU PROJETO"],
+    "sobre": ["GUILHERME DEV", "HTML5", "CSS3", "JAVASCRIPT", "DESENVOLVIMENTO WEB"],
+    "contato": ["FALE COMIGO", "WHATSAPP", "SOLICITAR ORÇAMENTO", "SEU PROJETO"]
+  };
+  const CHANCE_FRASE = 0.1;                                          // chance de uma linha ser uma frase da seção (poucas por coluna)
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pick = (v) => v[Math.floor(Math.random() * v.length)];
+
+  function criarChuva(hero, FRASES) {          // monta a chuva dentro de UMA seção, com as frases dela
+    const camada = document.createElement("div");
+    camada.className = "chuva-codigo";
+    camada.setAttribute("aria-hidden", "true");
+    hero.classList.add("tem-chuva");
+    hero.insertBefore(camada, hero.firstChild);
+
+    let fluxos = [], largura = 0;
+
+    // (re)escreve as linhas de uma coluna: rastro que vai ficando mais apagado para cima, ponta da frente brilhante
+    function preencher(fluxo) {
+      const n = fluxo._n, forca = fluxo._forca, frag = document.createDocumentFragment();
+      for (let i = 0; i < n; i++) {
+        const l = document.createElement("div"), cabeca = i === n - 1, t = i / (n - 1);
+        const frase = !cabeca && FRASES.length && Math.random() < CHANCE_FRASE;   // frase da seção no meio dos códigos
+        l.textContent = frase ? pick(FRASES) : pick(TRECHOS);
+        l.style.color = frase ? "#e0e7ff" : cabeca ? pick(CABECA) : pick(CORES);
+        l.style.opacity = frase ? Math.max(0.6, 0.45 + 0.5 * t) * forca : (cabeca ? 1 : 0.28 + 0.62 * t * (0.5 + Math.random() * 0.5)) * forca;
+        if (frase) l.className = "f";                                            // frases: mais destaque que os códigos
+        else if (cabeca || (t > 0.7 && Math.random() < 0.3)) l.className = "b";       // brilho (glow) só em poucas linhas
+        frag.appendChild(l);
+      }
+      fluxo.textContent = "";
+      fluxo.appendChild(frag);
+    }
+
+    function posicionar(fluxo, passo) {
+      fluxo.style.left = ((fluxo._i + rnd(0.05, 0.55)) * passo) + "px";
+    }
+
+    function medir() {
+      const alt = camada.clientHeight;
+      fluxos.forEach((f) => {
+        f.style.setProperty("--ini", -f.offsetHeight + "px");
+        f.style.setProperty("--fim", alt + "px");
+      });
+    }
+
+    function criar() {
+      fluxos.forEach((f) => f.remove());
+      fluxos = [];
+      largura = camada.clientWidth;
+      const alt = camada.clientHeight || 700;
+      const qtd = Math.max(3, Math.min(15, Math.floor(largura / 130)));   // poucas colunas no celular = leve
+      const passo = largura / qtd;
+      const linhas = Math.max(10, Math.min(22, Math.round(alt / 55)));
+      for (let i = 0; i < qtd; i++) {
+        const f = document.createElement("div");
+        f.className = "chuva-fluxo";
+        f._i = i; f._n = linhas + Math.round(rnd(-3, 3)); f._forca = rnd(0.7, 1);
+        preencher(f);
+        posicionar(f, passo);
+        const dur = rnd(DURACAO[0], DURACAO[1]);
+        f.style.animationDuration = dur + "s";
+        f.style.animationDelay = (-rnd(0, dur)) + "s";                     // começam em pontos diferentes: a tela já nasce cheia
+        f.addEventListener("animationiteration", () => { preencher(f); posicionar(f, largura / qtd); f._forca = rnd(0.7, 1); });  // renova e reutiliza a coluna
+        camada.appendChild(f);
+        fluxos.push(f);
+      }
+      medir();
+    }
+
+    criar();
+
+    // só anima enquanto a seção Início está visível (economiza bateria no celular)
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => es.forEach((e) => camada.classList.toggle("pausada", !e.isIntersecting))).observe(hero);
+    }
+
+    let tempo;
+    window.addEventListener("resize", () => {
+      clearTimeout(tempo);
+      tempo = setTimeout(() => {
+        const mudouLargura = Math.abs(camada.clientWidth - largura) > 40;
+        if (mudouLargura) criar(); else medir();                            // barra do navegador do celular só muda a altura
+      }, 200);
+    });
+  }
+
+  // uma chuva em cada seção que tem frases definidas
+  Object.keys(FRASES_POR_SECAO).forEach((id) => {
+    const secao = document.getElementById(id);
+    if (secao) criarChuva(secao, FRASES_POR_SECAO[id]);
+  });
+})();
+/* =====================================================
+   ⚙ CONFIGURAÇÃO (administrador) — troca do número do WhatsApp
+   -----------------------------------------------------
+   ATENÇÃO (site só HTML/CSS/JS): a senha abaixo fica no código da página e a verificação roda no navegador.
+   Isso afasta curiosos, mas NÃO é segurança de verdade, e o número salvo vale só neste navegador.
+   Para valer para todos os visitantes e ter login seguro, publique o backend da pasta backend-exemplo/
+   e preencha API_URL (ex.: "/api" ou "https://seu-backend.com/api"). Com API_URL preenchida, a senha é
+   conferida SÓ no servidor e este código nem a usa.
+   ===================================================== */
+(function areaAdmin() {
+  const API_URL = "";                                                        // "" = modo local (só este navegador)
+  const SAL = "guilherme-dev-admin-v1";
+  const HASH_SENHA = "d7b104462ac530ad30abd55b7eb9dd70218396e1d3ae518211f4a724e3bd0e31";   // PBKDF2-SHA256 da senha (modo local)
+  const CHAVE = "whatsappAdmin";
+
+  const normalizar = (txt) => {                                              // tira espaços, ( ), -, + etc.; 10-11 dígitos = sem DDI, soma 55
+    let n = String(txt).replace(/\D/g, "");
+    if (n.length === 10 || n.length === 11) n = "55" + n;
+    return /^\d{12,15}$/.test(n) ? n : null;
+  };
+  const formatar = (n) => /^55\d{11}$/.test(n) ? `55 ${n.slice(2, 4)} ${n.slice(4, 9)}-${n.slice(9)}` : /^55\d{10}$/.test(n) ? `55 ${n.slice(2, 4)} ${n.slice(4, 8)}-${n.slice(8)}` : n;
+
+  // aplica o número em TODOS os links de WhatsApp da página (💬 Falar comigo, botões de serviços/planos etc.)
+  function aplicar(n) {
+    CONFIG.whatsapp = n;
+    document.querySelectorAll('a[href*="wa.me/"]').forEach((a) => { a.href = a.href.replace(/wa\.me\/\d+/, "wa.me/" + n); });
+  }
+
+  // número salvo: servidor (se houver API) ou este navegador
+  let salvo = null;
+  try { salvo = normalizar(localStorage.getItem(CHAVE) || ""); } catch (e) {}
+  if (!API_URL && salvo) aplicar(salvo);
+  if (API_URL) {
+    fetch(API_URL + "/config", { cache: "no-store" }).then((r) => r.json()).then((d) => { const n = d && /^\d{10,15}$/.test(String(d.whatsapp)) ? String(d.whatsapp) : null; if (n) aplicar(n); }).catch(() => {});
+  }
+
+  async function hashSenha(txt) {
+    const enc = new TextEncoder();
+    const chave = await crypto.subtle.importKey("raw", enc.encode(txt), "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: enc.encode(SAL), iterations: 150000, hash: "SHA-256" }, chave, 256);
+    return Array.from(new Uint8Array(bits)).map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  // ---- modal ----
+  const fundo = document.createElement("div");
+  fundo.className = "adm-fundo"; fundo.hidden = true;
+  fundo.innerHTML = `
+    <div class="adm-caixa glass" role="dialog" aria-modal="true" aria-labelledby="adm-titulo">
+      <button class="adm-x" type="button" aria-label="Fechar">×</button>
+      <div id="adm-login">
+        <h2 id="adm-titulo">⚙ Configuração</h2>
+        <p>Área exclusiva do administrador. Digite a senha para continuar.</p>
+        <label for="adm-senha">Senha de administrador</label>
+        <div class="adm-linha"><input id="adm-senha" type="password" autocomplete="current-password"><button class="btn btn-p" type="button" id="adm-entrar">Entrar</button></div>
+        <p class="adm-msg" id="adm-erro" role="alert"></p>
+      </div>
+      <div id="adm-painel" hidden>
+        <h2>Configuração do WhatsApp</h2>
+        <p>Número usado pelo botão <b>💬 Falar comigo</b> e pelos demais botões de WhatsApp do site.</p>
+        <label for="adm-numero">Número do WhatsApp</label>
+        <div class="adm-linha"><input id="adm-numero" type="tel" inputmode="tel" placeholder="55 79 99999-9999" autocomplete="off"><button class="btn btn-p" type="button" id="adm-salvar">Salvar</button></div>
+        <p class="adm-msg" id="adm-aviso" role="status"></p>
+        <div class="adm-info">Link atual: <b id="adm-link"></b><br><span id="adm-modo"></span></div>
+        <button class="adm-sair" type="button" id="adm-sair">Sair da configuração</button>
+      </div>
+    </div>`;
+  document.body.appendChild(fundo);
+
+  const q = (s) => fundo.querySelector(s);
+  const caixa = q(".adm-caixa"), vLogin = q("#adm-login"), vPainel = q("#adm-painel");
+  const campoSenha = q("#adm-senha"), erro = q("#adm-erro"), campoNum = q("#adm-numero"), aviso = q("#adm-aviso");
+  let token = null, logado = false, falhas = 0, bloqueioAte = 0, gatilho = null;
+
+  function mostrarPainel() {
+    logado = true; vLogin.hidden = true; vPainel.hidden = false;
+    campoNum.value = formatar(CONFIG.whatsapp);
+    q("#adm-link").textContent = "https://wa.me/" + CONFIG.whatsapp;
+    q("#adm-modo").textContent = API_URL ? "Salvo no servidor: vale para todos os visitantes." : "Modo local: a alteração vale somente neste navegador (veja a explicação no código).";
+    aviso.textContent = ""; setTimeout(() => campoNum.focus(), 0);
+  }
+  function mostrarLogin() {
+    logado = false; token = null; vPainel.hidden = true; vLogin.hidden = false;
+    campoSenha.value = ""; erro.textContent = ""; setTimeout(() => campoSenha.focus(), 0);
+  }
+  function abrir(ev) {
+    ev.preventDefault();
+    gatilho = ev.currentTarget; fundo.hidden = false; document.body.style.overflow = "hidden";
+    logado ? mostrarPainel() : mostrarLogin();
+  }
+  function fechar() {
+    fundo.hidden = true; document.body.style.overflow = "";
+    campoSenha.value = ""; if (gatilho) gatilho.focus();
+  }
+
+  async function entrar() {
+    const agora = Date.now();
+    if (agora < bloqueioAte) { erro.textContent = `Muitas tentativas. Aguarde ${Math.ceil((bloqueioAte - agora) / 1000)} s.`; return; }
+    const senha = campoSenha.value;
+    if (!senha) { erro.textContent = "Digite a senha."; return; }
+    erro.textContent = "Verificando..."; erro.classList.remove("ok");
+    let ok = false;
+    try {
+      if (API_URL) {                                                           // login real no servidor
+        const r = await fetch(API_URL + "/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ senha }) });
+        const d = await r.json().catch(() => ({}));
+        if (r.status === 429) { erro.textContent = d.erro || "Muitas tentativas. Aguarde alguns minutos."; return; }
+        if (r.ok && d.token) { token = d.token; ok = true; }
+      } else {                                                                  // modo local (não é segurança real)
+        if (!(window.crypto && crypto.subtle)) { erro.textContent = "Abra o site por HTTPS (ou localhost) para usar a configuração."; return; }
+        ok = (await hashSenha(senha)) === HASH_SENHA;
+      }
+    } catch (e) { erro.textContent = "Não foi possível verificar agora. Tente novamente."; return; }
+    if (ok) { falhas = 0; mostrarPainel(); return; }
+    falhas++; campoSenha.select();
+    if (falhas >= 5) { bloqueioAte = Date.now() + 30000; falhas = 0; erro.textContent = "Muitas tentativas. Aguarde 30 s."; }
+    else erro.textContent = "Senha incorreta.";
+  }
+
+  async function salvar() {
+    if (!logado) return;
+    const n = normalizar(campoNum.value);
+    aviso.classList.remove("ok");
+    if (!n) { aviso.textContent = "Número inválido. Use DDD + número, ex.: 55 79 99999-9999."; return; }
+    try {
+      if (API_URL) {
+        const r = await fetch(API_URL + "/config", { method: "PUT", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ whatsapp: n }) });
+        if (r.status === 401) { aviso.textContent = "Sessão expirada. Entre novamente."; mostrarLogin(); return; }
+        if (!r.ok) { aviso.textContent = "Não foi possível salvar."; return; }
+      } else {
+        try { localStorage.setItem(CHAVE, n); } catch (e) { aviso.textContent = "O navegador não permitiu salvar."; return; }
+      }
+    } catch (e) { aviso.textContent = "Não foi possível salvar agora. Tente novamente."; return; }
+    aplicar(n);
+    campoNum.value = formatar(n); q("#adm-link").textContent = "https://wa.me/" + n;
+    aviso.classList.add("ok"); aviso.textContent = "Número salvo! O botão \"Falar comigo\" já usa o novo número.";
+  }
+
+  document.querySelectorAll('#menu a[href="#configuracao"]').forEach((a) => { a.setAttribute("aria-haspopup", "dialog"); a.addEventListener("click", abrir); });
+  q(".adm-x").addEventListener("click", fechar);
+  fundo.addEventListener("mousedown", (e) => { if (e.target === fundo) fechar(); });
+  q("#adm-entrar").addEventListener("click", entrar);
+  campoSenha.addEventListener("keydown", (e) => { if (e.key === "Enter") entrar(); });
+  q("#adm-salvar").addEventListener("click", salvar);
+  campoNum.addEventListener("keydown", (e) => { if (e.key === "Enter") salvar(); });
+  q("#adm-sair").addEventListener("click", () => { mostrarLogin(); fechar(); });
+  document.addEventListener("keydown", (e) => {
+    if (fundo.hidden) return;
+    if (e.key === "Escape") { fechar(); return; }
+    if (e.key === "Tab") {                                                      // mantém o foco dentro do modal
+      const f = Array.from(caixa.querySelectorAll("button,input")).filter((x) => x.offsetParent !== null);
+      if (!f.length) return;
+      const a = f[0], z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    }
+  });
+})();
+</script>
+<script>
+/* =====================================================
+   DEMONSTRAÇÃO LOJA VIRTUAL (VITRINE) — interativa, na mesma página, sem abrir outra aba.
+   Usa CONFIG.whatsapp e linkWpp() do site (inclusive o número trocado no painel de configuração).
+   ===================================================== */
+(function demoLoja() {
+  const raiz = document.getElementById("demo-loja");
+  if (!raiz) return;
+  const $d = (s) => raiz.querySelector(s);
+  const brl = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }).replace(/\u00a0/g, " ");
+  const PRODUTOS = [   // exemplos — "dest" = aparece em "Produtos em destaque"
+    { id: 1, nome: "Tênis Casual", preco: 149.9, cat: "Moda", ico: "👟", dest: 1 },
+    { id: 2, nome: "Fone Bluetooth", preco: 89.9, cat: "Eletrônicos", ico: "🎧", dest: 1 },
+    { id: 3, nome: "Relógio Moderno", preco: 119.9, cat: "Acessórios", ico: "⌚", dest: 1 },
+    { id: 4, nome: "Mochila Urbana", preco: 99.9, cat: "Acessórios", ico: "🎒", dest: 1 },
+    { id: 5, nome: "Camiseta Básica", preco: 49.9, cat: "Moda", ico: "👕" },
+    { id: 6, nome: "Carregador Turbo", preco: 49.9, cat: "Eletrônicos", ico: "🔌" },
+    { id: 7, nome: "Luminária de Mesa", preco: 69.9, cat: "Casa", ico: "💡" },
+    { id: 8, nome: "Jogo de Copos", preco: 39.9, cat: "Casa", ico: "🥃" },
+    { id: 9, nome: "Kit Skincare", preco: 79.9, cat: "Beleza", ico: "🧴" },
+    { id: 10, nome: "Perfume Floral", preco: 129.9, cat: "Beleza", ico: "🌸" },
+    { id: 11, nome: "Garrafa Térmica", preco: 59.9, cat: "Utilidades", ico: "🥤" },
+    { id: 12, nome: "Organizador Multiuso", preco: 29.9, cat: "Utilidades", ico: "📦" }
+  ];
+  const CATS = ["Todos", "Moda", "Acessórios", "Eletrônicos", "Casa", "Beleza", "Utilidades"];
+  let cat = "Todos", sacola = {}, y0 = 0, tTimer;
+
+  function vitrine() {
+    $d("#dm-cats").innerHTML = CATS.map((c) => `<button type="button" class="dm-cat${c === cat ? " on" : ""}" data-cat="${c}">${c}</button>`).join("");
+    $d("#dm-titulo").textContent = cat === "Todos" ? "Produtos em destaque" : cat;
+    const lista = PRODUTOS.filter((p) => (cat === "Todos" ? p.dest : p.cat === cat));
+    $d("#dm-grid").innerHTML = lista.map((p) => `
+      <article class="dm-card"><div class="dm-img" aria-hidden="true">${p.dest ? '<span class="dm-sel">DESTAQUE</span>' : ""}${p.ico}</div>
+      <span class="dm-cat-n">${p.cat}</span><h3>${p.nome}</h3><div class="dm-preco">${brl(p.preco)}</div>
+      <button class="btn btn-p" type="button" data-add="${p.id}">ADICIONAR À SACOLA</button></article>`).join("");
+  }
+
+  const itens = () => PRODUTOS.filter((p) => sacola[p.id]).map((p) => ({ ...p, q: sacola[p.id] }));
+  const total = () => itens().reduce((s, p) => s + p.preco * p.q, 0);
+
+  function desenharSacola() {
+    const its = itens();
+    $d("#dm-n").textContent = its.reduce((s, p) => s + p.q, 0);
+    $d("#dm-total").textContent = brl(total());
+    $d("#dm-itens").innerHTML = its.length ? its.map((p) => `
+      <div class="dm-it"><span class="ic" aria-hidden="true">${p.ico}</span><b>${p.nome}</b><b>${brl(p.preco * p.q)}</b>
+      <div class="dm-qtd"><button type="button" data-menos="${p.id}" aria-label="Diminuir">−</button><span>${p.q}</span><button type="button" data-mais="${p.id}" aria-label="Aumentar">+</button></div>
+      <button class="dm-rm" type="button" data-rm="${p.id}">Remover</button></div>`).join("")
+      : '<p class="dm-vazio">Sua sacola está vazia.<br>Adicione produtos para ver o total aqui.</p>';
+  }
+
+  function aviso(txt) {
+    clearTimeout(tTimer);
+    let t = $d(".dm-toast"); if (!t) { t = document.createElement("div"); t.className = "dm-toast"; t.setAttribute("role", "status"); raiz.appendChild(t); }
+    t.textContent = txt; tTimer = setTimeout(() => t.remove(), 1800);
+  }
+
+  const gaveta = (abrir) => { $d("#dm-gaveta").hidden = $d("#dm-fundo").hidden = !abrir; };
+  const tela = (qual) => { $d("#dm-loja").hidden = qual !== "loja"; $d("#dm-apres").hidden = qual !== "apres"; gaveta(false); const tt = $d(".dm-toast"); if (tt) tt.remove(); raiz.scrollTop = 0; };
+  const wpp = (msg) => window.open(linkWpp(msg), "_blank", "noopener,noreferrer");
+
+  function abrir() {
+    y0 = window.scrollY;
+    cat = "Todos"; sacola = {}; vitrine(); desenharSacola(); tela("loja");
+    raiz.hidden = false; document.documentElement.style.overflow = "hidden"; raiz.focus();
+  }
+  function fechar() {
+    raiz.hidden = true; document.documentElement.style.overflow = "";
+    window.scrollTo({ top: y0, behavior: "instant" });            // volta exatamente para o card "Qual site você precisa?"
+  }
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("[data-demo=loja]");
+    if (a) { e.preventDefault(); abrir(); }
+  });
+  raiz.addEventListener("click", (e) => {
+    const t = e.target.closest("button,a"); if (!t) return;
+    const d = t.dataset;
+    if (d.cat) { cat = d.cat; vitrine(); return; }
+    if (d.add) { sacola[d.add] = (sacola[d.add] || 0) + 1; desenharSacola(); aviso("✓ Adicionado à sacola"); return; }
+    if (d.mais) { sacola[d.mais]++; desenharSacola(); return; }
+    if (d.menos) { if (--sacola[d.menos] <= 0) delete sacola[d.menos]; desenharSacola(); return; }
+    if (d.rm) { delete sacola[d.rm]; desenharSacola(); return; }
+    if (d.go) { const alvo = raiz.querySelector("#" + d.go); if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    switch (d.dm) {
+      case "voltar": fechar(); break;
+      case "loja": tela("loja"); break;
+      case "sacola": gaveta(true); break;
+      case "fechar": gaveta(false); break;
+      case "quero": tela("apres"); break;
+      case "comecar": wpp("Olá! Vi a demonstração da loja VITRINE no seu portfólio e quero começar meu projeto de loja virtual. Podemos conversar sobre o meu negócio?"); break;
+      case "pedido": {
+        const its = itens();
+        if (!its.length) { aviso("Adicione um produto primeiro"); break; }
+        wpp("Olá! Estou testando a demonstração da loja VITRINE e quero finalizar este pedido de exemplo:\n\n" +
+          its.map((p) => `• ${p.q}x ${p.nome} — ${brl(p.preco * p.q)}`).join("\n") + `\n\nTotal: ${brl(total())}`);
+        break;
+      }
+    }
+  });
+  $d("#dm-fundo").addEventListener("click", () => gaveta(false));
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || raiz.hidden) return;
+    if (!$d("#dm-gaveta").hidden) gaveta(false); else fechar();
+  });
+})();
+</script>
+<script>
+/* =====================================================
+   DEMONSTRAÇÃO SITE PARA BARBEARIA (BARBER CLUB) — interativa, na mesma página, sem abrir outra aba.
+   Usa CONFIG.whatsapp e linkWpp() do site (inclusive o número trocado no painel de configuração).
+   ===================================================== */
+(function demoBarbearia() {
+  const raiz = document.getElementById("demo-barbearia");
+  if (!raiz) return;
+  const $b = (s) => raiz.querySelector(s);
+  const SERVICOS = [   // exemplos
+    { nome: "Corte masculino", ico: "✂️", preco: "A partir de R$ 35,00" },
+    { nome: "Barba", ico: "🧔", preco: "A partir de R$ 30,00" },
+    { nome: "Corte + Barba", ico: "🔥", preco: "A partir de R$ 60,00" },
+    { nome: "Sobrancelha", ico: "✨", preco: "A partir de R$ 10,00" },
+    { nome: "Pigmentação", ico: "🎨", preco: "A partir de R$ 60,00" },
+    { nome: "Hidratação", ico: "💧", preco: "A partir de R$ 30,00" }
+  ];
+  const BARBEIROS = ["Rafael", "André", "Lucas"];
+  const DIAS = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+  const HORAS = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+  let e = {}, passo = 1, y0 = 0;     // e = escolhas: svc, barb, dia, hora
+
+  $b("#bb-svcs").innerHTML = SERVICOS.map((s, i) => `
+    <article class="dm-card"><div class="dm-img" aria-hidden="true">${s.ico}</div>
+    <h3>${s.nome.toUpperCase()}</h3><div class="dm-preco">${s.preco}</div>
+    <button class="btn btn-p" type="button" data-svc="${i}">AGENDAR</button></article>`).join("");
+
+  const wpp = (msg) => window.open(linkWpp(msg), "_blank", "noopener,noreferrer");
+  const opt = (on, attr, html, cls) => `<button type="button" class="${cls}${on ? " on" : ""}" ${attr} role="radio" aria-checked="${!!on}">${html}</button>`;
+
+  function desenhar() {
+    const nomes = ["Serviço", "Barbeiro", "Data e horário"];
+    const trilha = passo > 3 ? "" : `<div class="bb-steps">${nomes.map((n, i) => `<div class="bb-st${passo === i + 1 ? " on" : passo > i + 1 ? " ok" : ""}">${passo > i + 1 ? "✓" : i + 1} · ${n}</div>`).join("")}</div>`;
+    let h = "";
+    if (passo === 1) {
+      h = `<h3>O que você deseja fazer hoje?</h3><div class="bb-ops" role="radiogroup">${SERVICOS.map((s, i) => opt(e.svc === i, `data-s="${i}"`, `<span>${e.svc === i ? "●" : "○"} ${s.nome}</span><small>${s.preco.replace("A partir de ", "")}</small>`, "bb-op")).join("")}</div>
+        <div class="bb-nav"><button class="btn btn-p" type="button" data-bb="prox" ${e.svc == null ? "disabled" : ""}>CONTINUAR</button></div>`;
+    } else if (passo === 2) {
+      h = `<h3>Escolha o barbeiro</h3><div class="bb-barbs" role="radiogroup">${BARBEIROS.map((n, i) => opt(e.barb === i, `data-b="${i}"`, `<span class="bb-av" aria-hidden="true">${n[0]}</span><b>${n.toUpperCase()}</b><small>Barbeiro</small>`, "bb-b")).join("")}</div>
+        <div class="bb-nav"><button class="dm-voltar" type="button" data-bb="ant">← Voltar</button><button class="btn btn-p" type="button" data-bb="prox" ${e.barb == null ? "disabled" : ""}>CONTINUAR</button></div>`;
+    } else if (passo === 3) {
+      h = `<h3>Escolha o dia</h3><div class="bb-grade" role="radiogroup">${DIAS.map((d, i) => opt(e.dia === i, `data-d="${i}"`, d.slice(0, 3).toUpperCase().replace("TER", "TER"), "bb-t")).join("")}</div>
+        <h4>Horários disponíveis</h4><div class="bb-grade" role="radiogroup">${HORAS.map((x, i) => opt(e.hora === i, `data-h="${i}"`, x, "bb-t")).join("")}</div>
+        <div class="bb-nav"><button class="dm-voltar" type="button" data-bb="ant">← Voltar</button><button class="btn btn-p" type="button" data-bb="prox" ${e.dia == null || e.hora == null ? "disabled" : ""}>CONFIRMAR</button></div>`;
+    } else {
+      h = `<div class="bb-ok"><div class="tick" aria-hidden="true">✓</div><h3>TUDO CERTO!</h3>
+        <div class="bb-resumo"><div><span>Serviço</span><b>${SERVICOS[e.svc].nome}</b></div><div><span>Barbeiro</span><b>${BARBEIROS[e.barb]}</b></div><div><span>Data</span><b>${DIAS[e.dia]}</b></div><div><span>Horário</span><b>${HORAS[e.hora]}</b></div></div>
+        <p>Agora vamos confirmar seu atendimento pelo WhatsApp.</p>
+        <div class="dm-acoes"><button class="btn btn-p" type="button" data-bb="confirmar">CONFIRMAR PELO WHATSAPP</button></div>
+        <div class="dm-acoes"><button class="dm-voltar" type="button" data-bb="alterar">← Voltar e alterar horário</button></div></div>`;
+    }
+    $b("#bb-wiz").innerHTML = trilha + h;
+  }
+
+  function abrir() {
+    y0 = window.scrollY; e = {}; passo = 1; desenhar();
+    raiz.hidden = false; raiz.scrollTop = 0; document.documentElement.style.overflow = "hidden"; raiz.focus();
+  }
+  function fechar() {
+    raiz.hidden = true; document.documentElement.style.overflow = "";
+    window.scrollTo({ top: y0, behavior: "instant" });            // volta exatamente para o card "Qual site você precisa?"
+  }
+  const irAgendar = () => $b("#bb-agendar").scrollIntoView({ behavior: "smooth", block: "start" });
+
+  document.addEventListener("click", (ev) => {
+    const a = ev.target.closest("[data-demo=barbearia]");
+    if (a) { ev.preventDefault(); abrir(); }
+  });
+  raiz.addEventListener("click", (ev) => {
+    const t = ev.target.closest("button,a"); if (!t) return;
+    const d = t.dataset;
+    if (d.svc != null) { e.svc = +d.svc; passo = 1; desenhar(); irAgendar(); return; }   // "AGENDAR" do card: já seleciona o serviço
+    if (d.s != null) { e.svc = +d.s; desenhar(); return; }
+    if (d.b != null) { e.barb = +d.b; desenhar(); return; }
+    if (d.d != null) { e.dia = +d.d; desenhar(); return; }
+    if (d.h != null) { e.hora = +d.h; desenhar(); return; }
+    if (d.go) { const alvo = raiz.querySelector("#" + d.go); if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    switch (d.bb) {
+      case "voltar": fechar(); break;
+      case "prox": if (!t.disabled) { passo++; desenhar(); } break;
+      case "ant": passo--; desenhar(); break;
+      case "alterar": passo = 3; desenhar(); break;
+      case "wpp": wpp("Olá! Vi a demonstração da Barber Club e gostaria de agendar um horário."); break;
+      case "confirmar":
+        wpp(`Olá! Gostaria de confirmar meu agendamento na Barber Club.\n\nServiço: ${SERVICOS[e.svc].nome}\nBarbeiro: ${BARBEIROS[e.barb]}\nDia: ${DIAS[e.dia]}\nHorário: ${HORAS[e.hora]}\n\nAguardo a confirmação. Obrigado!`);
+        break;
+    }
+  });
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !raiz.hidden) fechar(); });
+})();
+</script>
+<script>
+/* =====================================================
+   DEMONSTRAÇÃO INKFLOW — sistema para estúdio de tatuagem (cliente + painel do estúdio).
+   Tudo na mesma página, dados fictícios e estado em memória (sem backend).
+   WhatsApp: usa CONFIG.whatsapp / linkWpp() do site (inclusive o número trocado no painel de configuração).
+   ===================================================== */
+(function demoTatuagem() {
+  const raiz = document.getElementById("demo-tatuagem");
+  if (!raiz) return;
+  const $t = (s) => raiz.querySelector(s);
+  const brl = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }).replace(/\u00a0/g, " ");
+  const hh = (h) => String(h).padStart(2, "0") + ":00";
+  const fmtData = (v) => (v ? v.split("-").reverse().join("/") : "A combinar");
+  const ARTS = ["Rafael", "Lucas", "André"];
+  const ESP = { Rafael: "Blackwork", Lucas: "Fine Line", "André": "Realismo" }, SESS = { Rafael: 12, Lucas: 18, "André": 9 };
+  const DIAS = [["Seg", "Segunda-feira"], ["Ter", "Terça-feira"], ["Qua", "Quarta-feira"], ["Qui", "Quinta-feira"], ["Sex", "Sexta-feira"], ["Sáb", "Sábado"]];
+  const H0 = 9, H1 = 18;
+  const CATS = ["Todos", "Blackwork", "Fine Line", "Realismo", "Old School", "Colorido"];
+  const TRAB = [
+    { n: "Fechamento de braço", e: "Blackwork", l: "Braço", t: "Grande · ~30 cm", s: "5 horas", i: "🖤" },
+    { n: "Mandala sombreada", e: "Blackwork", l: "Costas", t: "Média · ~20 cm", s: "3 horas", i: "🕸️" },
+    { n: "Ramo de flores", e: "Fine Line", l: "Antebraço", t: "Pequena · ~8 cm", s: "1h30", i: "🌿" },
+    { n: "Constelação", e: "Fine Line", l: "Costela", t: "Pequena · ~10 cm", s: "1 hora", i: "✨" },
+    { n: "Retrato de leão", e: "Realismo", l: "Perna", t: "Grande · ~25 cm", s: "6 horas", i: "🦁" },
+    { n: "Olho realista", e: "Realismo", l: "Braço", t: "Média · ~12 cm", s: "3 horas", i: "👁️" },
+    { n: "Âncora clássica", e: "Old School", l: "Panturrilha", t: "Média · ~15 cm", s: "2 horas", i: "⚓" },
+    { n: "Caveira com rosas", e: "Old School", l: "Braço", t: "Média · ~18 cm", s: "3 horas", i: "💀" },
+    { n: "Borboleta aquarela", e: "Colorido", l: "Ombro", t: "Média · ~14 cm", s: "2h30", i: "🦋" },
+    { n: "Dragão oriental", e: "Colorido", l: "Costas", t: "Grande · ~35 cm", s: "8 horas", i: "🐉" }
+  ];
+  const FLASH = [{ id: "014", i: "🗡️", p: 300, t: "10 cm", l: "Braço / Perna" }, { id: "021", i: "🌹", p: 250, t: "8 cm", l: "Antebraço" }, { id: "033", i: "🐍", p: 350, t: "12 cm", l: "Perna" }, { id: "040", i: "🦅", p: 400, t: "14 cm", l: "Braço / Costas" }];
+  const STEPS = [
+    { k: "tipo", q: "Qual tipo de tatuagem?", o: ["Flash", "Projeto personalizado", "Fechamento", "Cover-up", "Retoque"] },
+    { k: "local", q: "Onde será?", o: ["Braço", "Antebraço", "Perna", "Costas", "Peito", "Mão", "Outro"] },
+    { k: "tam", q: "Qual tamanho?", o: ["Pequena", "Média", "Grande", "Ainda não sei"] },
+    { k: "estilo", q: "Qual estilo?", o: ["Blackwork", "Fine Line", "Realismo", "Old School", "Geométrica", "Colorida", "Outro"] },
+    { k: "refs" }, { k: "ideia" },
+    { k: "artista", q: "Preferência de artista:", o: ["Qualquer artista", "Rafael", "Lucas", "André"] }, { k: "data" }
+  ];
+  const CLI = [
+    { id: "joao", n: "João Silva", s: 4, g: 1340, h: [["01/08", "Blackwork", 650], ["15/06", "Retoque", 150], ["20/03", "Fine Line", 340], ["10/01", "Flash", 200]], obs: "Prefere sessões à tarde." },
+    { id: "maria", n: "Maria Souza", s: 2, g: 480, h: [["22/07", "Fine Line", 350], ["02/05", "Flash", 130]], obs: "Pele sensível; evitar sessões muito longas." },
+    { id: "pedro", n: "Pedro Alves", s: 3, g: 960, h: [["30/07", "Fine Line", 480], ["12/06", "Fine Line", 300], ["03/03", "Flash", 180]], obs: "Gosta de acompanhar o desenho antes da sessão." },
+    { id: "carla", n: "Carla Lima", s: 1, g: 520, h: [["18/08", "Cover-up", 520]], obs: "Cover-up em andamento." }
+  ];
+  const SEED = { cli: "João Silva", tipo: "Projeto personalizado", estilo: "Blackwork", local: "Antebraço", tam: "15 cm", tamK: "Média", refs: 3, ideia: "Quero uma composição com elementos geométricos e sombreamento em preto.", artista: "Rafael", quando: "", seed: true };
+  const SEEDBOOK = [
+    { id: "s1", dia: 4, art: "Rafael", h: 13, dur: 3, cli: "João", estilo: "Blackwork", t: "s" },
+    { id: "s2", dia: 4, art: "Rafael", h: 17, dur: 1, cli: "Maria", estilo: "Flash", t: "s" },
+    { id: "s3", dia: 4, art: "Lucas", h: 10, dur: 2, cli: "Pedro", estilo: "Fine Line", t: "s" },
+    { id: "s4", dia: 4, art: "André", h: 9, dur: 4, cli: "Carla", estilo: "Cover-up", t: "s" }
+  ];
+  const NAVC = [["inicio", "Início"], ["portfolio", "Portfólio"], ["artistas", "Artistas"], ["orcamento", "Orçamento"], ["agendamento", "Agendamento"]];
+  const NAVE = [["dashboard", "Dashboard"], ["solicitacoes", "Solicitações"], ["agenda", "Agenda"], ["clientes", "Clientes"], ["projetos", "Projetos"], ["pagamentos", "Pagamentos"], ["equipe", "Equipe"], ["relatorios", "Relatórios"], ["lembretes", "Lembretes"], ["espera", "Lista de espera"]];
+
+  let S, y0 = 0, tT;
+  const novo = () => ({ mode: null, view: "inicio", stage: 1, req: { ...SEED }, quote: null, qd: null, analisando: false, recusada: false, pd: 4, pick: null, slot: null,
+    signed: false, chk: false, lembr: [0, 0, 0], espera: 0, step: 0, draft: {}, cat: "Todos", flashM: null, flashRes: {}, agDia: 4, sel: null, open: null,
+    busca: "", cli: null, ptab: "Referências", equipe: { Rafael: 1, Lucas: 1, "André": 1 }, book: SEEDBOOK.map((b) => ({ ...b })) });
+
+  const qDef = (r) => r.seed ? { h: 3, v: 650, s: 150 } : r.tipo === "Flash" ? { h: 1, v: 300, s: 100 }
+    : ({ Pequena: { h: 1, v: 250, s: 80 }, "Média": { h: 2, v: 450, s: 150 }, Grande: { h: 4, v: 900, s: 250 } }[r.tamK] || { h: 2, v: 450, s: 150 });
+  const Q = () => S.quote || qDef(S.req);
+  const dur = () => Math.max(1, Math.ceil(Q().h));
+  const livre = (dia, art, h, d, ign) => h >= H0 && h + d <= H1 && !S.book.some((b) => b.id !== ign && b.dia === dia && b.art === art && b.h < h + d && h < b.h + b.dur);
+  const servico = () => (S.req.tipo === "Projeto personalizado" ? "Tattoo personalizada" : S.req.tipo);
+  const slotTxt = () => (S.slot ? `${DIAS[S.slot.dia][1]} · ${hh(S.slot.h)}` : "Sexta-feira · 14:00");
+  const wpp = (m) => window.open(linkWpp(m), "_blank", "noopener,noreferrer");
+  const toast = (m) => { clearTimeout(tT); let t = $t(".dm-toast"); if (!t) { t = document.createElement("div"); t.className = "dm-toast"; t.setAttribute("role", "status"); raiz.appendChild(t); } t.textContent = m; tT = setTimeout(() => t.remove(), 2200); };
+  const btn = (txt, a, v, cls, extra) => `<button class="btn ${cls || "btn-p"}" type="button" data-a="${a}"${v != null ? ` data-v="${v}"` : ""} ${extra || ""}>${txt}</button>`;
+  const lin = (pares) => `<div class="ik-lin">${pares.map(([k, v]) => `<span>${k}</span><b>${v}</b>`).join("")}</div>`;
+  const trilha = () => { const n = ["Solicitação enviada", "Orçamento enviado", "Orçamento aceito", "Sinal e agenda", "Sessão realizada", "Pagamento final"];
+    return `<div class="ik-tl">${n.map((x, i) => `<div class="${S.stage > i + 1 ? "ok" : S.stage === i + 1 ? "now" : ""}">${S.stage > i + 1 ? "✓" : i + 1 === S.stage ? "●" : "○"} ${x}</div>`).join("")}</div>`; };
+
+  /* ---------- próximo passo do fluxo ---------- */
+  const proximo = () => ({
+    1: { t: "Etapa 1 de 6 · Solicitação recebida. Próximo: o estúdio analisa e envia o orçamento.", b: "IR PARA O PAINEL DO ESTÚDIO", m: "estudio", v: "solicitacoes" },
+    2: { t: "Etapa 2 de 6 · Orçamento enviado. Próximo: o cliente aceita e agenda.", b: "IR PARA A ÁREA DO CLIENTE", m: "cliente", v: "agendamento" },
+    3: { t: "Etapa 3 de 6 · Orçamento aceito. Próximo: escolher data e pagar o sinal.", b: "ESCOLHER DATA E SINAL", m: "cliente", v: "agendamento" },
+    4: { t: "Etapa 4 de 6 · Sinal recebido e sessão confirmada. Próximo: realizar a sessão.", b: "IR PARA PROJETOS", m: "estudio", v: "projetos" },
+    5: { t: "Etapa 5 de 6 · Sessão realizada. Próximo: receber o pagamento restante.", b: "IR PARA PAGAMENTOS", m: "estudio", v: "pagamentos" },
+    6: { t: "Fluxo completo! Pagamento final recebido e histórico do cliente atualizado.", b: "VER HISTÓRICO DO CLIENTE", m: "estudio", v: "clientes", cli: "joao" }
+  }[S.stage]);
+
+  /* ---------- telas ---------- */
+  const home = () => `<section class="dm-banner ik-home"><span class="dm-tag">SISTEMA PARA ESTÚDIOS DE TATUAGEM</span>
+    <h1>INKFLOW</h1><p>Organize clientes, orçamentos, sessões e agenda em um só lugar.</p><p class="ik-q">“Do primeiro contato até a sessão.”</p>
+    <div class="ik-row" style="justify-content:center;margin-top:1.6rem">${btn("SOU CLIENTE", "modo", "cliente")}${btn("SOU DO ESTÚDIO", "modo", "estudio")}</div>
+    <div class="ik-chips"><span>✓ Orçamentos</span><span>✓ Agenda</span><span>✓ Clientes</span><span>✓ Sinais</span><span>✓ Sessões</span><span>✓ Lembretes</span></div>
+    <p class="ik-mut" style="margin-top:1.4rem">Explore os dois lados e teste o fluxo completo: solicitação → orçamento → aceite → sinal → sessão → pagamento.</p></section>`;
+
+  const V = { cliente: {}, estudio: {} };
+  V.cliente.inicio = () => `<section class="dm-banner"><span class="dm-tag">ESTÚDIO INKFLOW</span><h1 style="max-width:20ch">Sua próxima tatuagem começa aqui.</h1>
+    <p>Veja o portfólio, peça um orçamento e agende sua sessão sem sair do celular.</p>
+    <div class="ik-row">${btn("QUERO FAZER UMA TATUAGEM", "novo")}${btn("FALAR COM O ESTÚDIO", "wfalar", null, "btn-s")}</div></section>
+    <div class="ik-grid"><div class="ik-c"><h3>🖼️ Portfólio</h3><p class="ik-mut">Trabalhos por estilo e flashs disponíveis.</p>${btn("VER PORTFÓLIO", "ir", "portfolio", "btn-s")}</div>
+    <div class="ik-c"><h3>📝 Orçamento inteligente</h3><p class="ik-mut">8 passos rápidos e o estúdio recebe tudo organizado.</p>${btn("PEDIR ORÇAMENTO", "novo", null, "btn-s")}</div>
+    <div class="ik-c"><h3>📅 Agendamento</h3><p class="ik-mut">Acompanhe o pedido, escolha a data e pague o sinal.</p>${btn("ACOMPANHAR", "ir", "agendamento", "btn-s")}</div></div>`;
+
+  V.cliente.portfolio = () => {
+    const l = TRAB.filter((w) => S.cat === "Todos" || w.e === S.cat);
+    return `<h2>Portfólio</h2><div class="ik-chips2">${CATS.map((c) => `<button class="ik-chip${c === S.cat ? " on" : ""}" type="button" data-a="cat" data-v="${c}">${c.toUpperCase()}</button>`).join("")}</div>
+    <div class="ik-grid" style="margin-top:1rem">${l.map((w) => `<article class="ik-c ik-w"><div class="vis" aria-hidden="true">${w.i}</div><span class="ik-tag">${w.e.toUpperCase()}</span><h3 style="margin-top:.6rem">${w.n}</h3>
+      <p class="ik-mut">${w.l} · ${w.t}<br>Sessão: ${w.s}</p>${btn("QUERO ALGO PARECIDO", "parecido", TRAB.indexOf(w), "btn-p")}</article>`).join("")}</div>
+    <h2>FLASH DISPONÍVEL</h2><div class="ik-grid">${FLASH.map((f) => `<article class="ik-c ik-w"><div class="vis" aria-hidden="true">${f.i}</div><h3>FLASH #${f.id}</h3><div class="ik-val">${brl(f.p)}</div>
+      <p class="ik-mut">Tamanho: ${f.t}<br>Local: ${f.l}</p>${S.flashRes[f.id] ? `<span class="ik-st">✓ RESERVADO</span>` : btn("RESERVAR", "reservar", f.id)}</article>`).join("")}</div>`;
+  };
+
+  V.cliente.artistas = () => `<h2>Artistas</h2><div class="ik-grid">${ARTS.map((a) => `<div class="ik-c ik-w"><div class="vis" style="font-size:2.4rem;font-weight:800" aria-hidden="true">${a[0]}</div>
+    <h3>${a.toUpperCase()}</h3><p class="ik-mut">Especialidade: ${ESP[a]}<br>${SESS[a]} sessões neste mês</p>${btn("PEDIR COM " + a.toUpperCase(), "artista", a, "btn-s")}</div>`).join("")}</div>`;
+
+  V.cliente.orcamento = () => {
+    const st = STEPS[S.step], d = S.draft, n = STEPS.length;
+    let corpo = "", ok = true;
+    if (st.o) { ok = !!d[st.k]; corpo = `<h3>${st.q}</h3><div class="ik-ops" role="radiogroup">${st.o.map((o) => `<button type="button" role="radio" aria-checked="${d[st.k] === o}" class="ik-op${d[st.k] === o ? " on" : ""}" data-a="opt" data-k="${st.k}" data-v="${o}">${d[st.k] === o ? "●" : "○"} ${o}</button>`).join("")}</div>`; }
+    else if (st.k === "refs") { const r = d.refs || 0, ic = ["🖼️", "📷", "🖋️", "🌹", "🐍", "🦅"]; corpo = `<h3>Referência</h3><p class="ik-mut">Anexe imagens que ajudem o artista a entender sua ideia.</p>
+      <div class="ik-refs">${Array.from({ length: r }, (_, i) => `<div class="ik-ref" aria-hidden="true">${ic[i]}</div>`).join("") || '<span class="ik-mut">Nenhuma referência adicionada.</span>'}</div>
+      <div class="ik-row" style="margin-top:0">${btn("ADICIONAR REFERÊNCIA", "addref", null, "btn-s", r >= 6 ? "disabled" : "")}${r ? btn("REMOVER ÚLTIMA", "rmref", null, "btn-s") : ""}</div><p class="ik-mut" style="margin-top:.8rem">Demonstração: nenhuma imagem é enviada de verdade.</p>`; }
+    else if (st.k === "ideia") corpo = `<h3>Descreva sua ideia:</h3><textarea id="ik-ideia" placeholder="Conte o que você imagina: elementos, significado, referências...">${esc(d.ideia || "")}</textarea>`;
+    else corpo = `<h3>Quando gostaria?</h3><div class="ik-f"><label for="ik-data">ESCOLHER DATA</label><input id="ik-data" type="date" value="${d.quando || ""}"></div>`;
+    const ultimo = S.step === n - 1;
+    return `<h2>Orçamento inteligente</h2>${d.de ? `<p class="ik-mut">✓ Estilo pré-selecionado a partir do portfólio: <b>${d.de}</b></p>` : ""}
+      <div class="ik-c"><p class="ik-mut">Etapa ${S.step + 1} de ${n}</p><div class="ik-prog"><i style="width:${((S.step + 1) / n) * 100}%"></i></div>${corpo}
+      <div class="ik-row">${S.step ? btn("← Voltar", "ant", null, "btn-s") : ""}${ultimo ? btn("ENVIAR SOLICITAÇÃO", "enviar") : btn("CONTINUAR", "prox", null, "btn-p", ok ? "" : "disabled")}</div></div>`;
+  };
+
+  V.cliente.enviada = () => `<div class="ik-c ik-ctr"><div class="ik-big">✓</div><h2 style="margin-top:0">SOLICITAÇÃO ENVIADA</h2><p class="ik-mut">Seu pedido foi enviado para o estúdio.<br>Você receberá o orçamento após a análise.</p>
+    <p style="margin-top:1rem">Status:</p><span class="ik-st">🟡 Aguardando análise</span><div class="ik-row" style="justify-content:center">${btn("ACOMPANHAR SOLICITAÇÃO", "ir", "agendamento")}</div></div>`;
+
+  const termo = () => S.signed ? `<div class="ik-c"><h3>TERMO DE CONSENTIMENTO</h3><span class="ik-st">✓ DOCUMENTO ASSINADO</span></div>`
+    : `<div class="ik-c"><h3>TERMO DE CONSENTIMENTO</h3>${lin([["Cliente", S.req.cli], ["Procedimento", "Tattoo " + S.req.estilo], ["Local", S.req.local + " direito"]])}
+      <label style="display:flex;gap:.6rem;margin-top:1rem;align-items:flex-start;cursor:pointer"><input id="ik-chk" type="checkbox" ${S.chk ? "checked" : ""} style="width:auto;margin-top:4px"> Li e concordo com as informações.</label>
+      <div class="ik-row">${btn("ASSINAR", "assinar", null, "btn-p", S.chk ? "" : "disabled")}</div></div>`;
+
+  V.cliente.agendamento = () => {
+    const q = Q(), r = S.req;
+    let c = "";
+    if (S.stage === 1) c = r.seed ? `<div class="ik-c ik-ctr"><h3>Nenhuma solicitação sua ainda</h3><p class="ik-mut">Peça um orçamento para começar o fluxo.</p>${btn("QUERO FAZER UMA TATUAGEM", "novo")}</div>`
+      : `<div class="ik-c ik-ctr"><h3>Sua solicitação</h3><span class="ik-st">🟡 Aguardando análise</span><p class="ik-mut" style="margin-top:1rem">O estúdio já recebeu seu pedido. Veja como ele aparece no painel:</p>${btn("VER NO PAINEL DO ESTÚDIO", "fluxo", null, "btn-s")}</div>`;
+    else if (S.stage === 2) c = `<div class="ik-c ik-ctr"><h2 style="margin-top:0">SEU PROJETO FOI AVALIADO</h2>${lin([["Valor", brl(q.v)], ["Sinal", brl(q.s)], ["Tempo estimado", q.h + " horas"]])}<div class="ik-row" style="justify-content:center">${btn("ACEITAR E AGENDAR", "aceitar")}</div></div>`;
+    else if (S.stage === 3) {
+      const d = dur(); let sl = [];
+      for (let h = H0; h < H1; h++) ARTS.forEach((a) => { if (livre(S.pd, a, h, d)) sl.push({ a, h }); });
+      const pref = sl.filter((x) => x.a === r.artista); if (pref.length) sl = pref;
+      c = `<div class="ik-c"><h3>Escolha a data e o horário</h3><p class="ik-mut">Sessão de ${q.h}h — o sistema só mostra horários com tempo livre suficiente.</p>
+        <div class="ik-chips2" style="margin-top:.8rem">${DIAS.map((x, i) => `<button class="ik-chip${S.pd === i ? " on" : ""}" type="button" data-a="pdia" data-v="${i}">${x[0].toUpperCase()}</button>`).join("")}</div>
+        <div class="ik-sel">${sl.map((x) => `<button type="button" class="ik-op${S.pick && S.pick.art === x.a && S.pick.h === x.h ? " on" : ""}" data-a="slot" data-art="${x.a}" data-hh="${x.h}">${hh(x.h)} · ${x.a}</button>`).join("") || '<span class="ik-mut">Sem horários neste dia.</span>'}</div>
+        <p class="ik-mut">Total ${brl(q.v)} · Sinal ${brl(q.s)} · Saldo ${brl(q.v - q.s)}</p><div class="ik-row">${btn("PAGAR SINAL (SIMULADO)", "sinal", null, "btn-p", S.pick ? "" : "disabled")}</div></div>`;
+    } else if (S.stage === 4) c = `<div class="ik-c ik-ctr"><span class="ik-st">🟢 SINAL RECEBIDO</span><h2>Sessão confirmada.</h2><p><b>${slotTxt()}</b> · com ${S.slot.art}</p>${lin([["Valor total", brl(q.v)], ["Sinal", brl(q.s)], ["Saldo", brl(q.v - q.s)]])}
+      <div class="ik-row" style="justify-content:center">${btn("CONFIRMAR PELO WHATSAPP", "wconf")}</div></div>${termo()}
+      <h2>Lembretes automáticos</h2>${[["7 dias antes", "Seu horário está chegando."], ["2 dias antes", "Lembrete: sua sessão será " + DIAS[S.slot.dia][1].toLowerCase() + " às " + S.slot.h + "h."], ["No dia", "Hoje é seu dia! 🖤"]].map((x) => `<div class="ik-l"><span><b>${x[0]}</b><br><span class="ik-mut">“${x[1]}”</span></span><span class="ik-st">⏰ Agendado</span></div>`).join("")}`;
+    else if (S.stage === 5) c = `<div class="ik-c ik-ctr"><span class="ik-st">✓ Sessão realizada</span><h2>Falta só o pagamento restante</h2>${lin([["Valor total", brl(q.v)], ["Sinal pago", brl(q.s)], ["Saldo", brl(q.v - q.s)]])}<div class="ik-row" style="justify-content:center">${btn("PAGAR SALDO (SIMULADO)", "saldo")}</div></div>`;
+    else c = `<div class="ik-c ik-ctr"><div class="ik-big">✓</div><h2 style="margin-top:0">Tudo concluído!</h2><p class="ik-mut">Pagamento final recebido e histórico atualizado no estúdio.</p><div class="ik-row" style="justify-content:center">${btn("VER NO PAINEL DO ESTÚDIO", "fluxo", null, "btn-s")}${btn("REINICIAR DEMONSTRAÇÃO", "reiniciar")}</div></div>`;
+    return `<h2>Agendamento</h2>${S.stage > 1 || !r.seed ? trilha() : ""}${c}`;
+  };
+
+  /* ----- painel do estúdio ----- */
+  V.estudio.dashboard = () => `<h2 style="margin-top:1.6rem">Olá, Rafael 👋</h2><p class="ik-mut">Hoje:</p>
+    <div class="ik-grid">${[["04", "Agendamentos"], ["02", "Orçamentos"], ["01", "Aguardando sinal"], ["03", "Novas mensagens"]].map((x) => `<div class="ik-c ik-kpi hoje"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
+    <h2>Indicadores</h2><div class="ik-grid">${[["Faturamento", "R$ 8.450"], ["Agendamentos", "32"], ["Orçamentos", "47"], ["Conversão", "68%"], ["No-show", "3%"], ["Sinais recebidos", "R$ 2.850"]].map((x) => `<div class="ik-c ik-kpi"><span>${x[0]}</span><b>${x[1]}</b></div>`).join("")}</div>
+    <h2>Serviços mais procurados</h2><div class="ik-c">${[["Blackwork", 42], ["Fine Line", 28], ["Realismo", 20], ["Outros", 10]].map((x) => `<div class="ik-bar"><span>${x[0]}</span><div><i style="width:${x[1] * 2.2}%"></i></div><b>${x[1]}%</b></div>`).join("")}</div>`;
+
+  const stSol = () => S.recusada ? "🔴 Recusada" : S.stage === 1 ? "🟡 Aguardando análise" : S.stage === 2 ? "🟢 Orçamento enviado" : S.stage === 3 ? "🟢 Orçamento aceito" : "🟢 Sessão confirmada";
+  V.estudio.solicitacoes = () => {
+    const r = S.req, q = S.qd;
+    let ed = "";
+    if (S.analisando && S.stage === 1) ed = `<div class="ik-c" style="margin-top:1rem;border-color:var(--azul)"><h3>ORÇAMENTO</h3>${lin([["Cliente", r.cli], ["Serviço", servico()]])}
+      <div class="ik-grid" style="margin-top:1rem"><div class="ik-f"><label>Tempo estimado (horas)</label><input type="number" min="1" step="1" data-q="h" value="${q.h}"></div>
+      <div class="ik-f"><label>Valor (R$)</label><input type="number" min="0" step="10" data-q="v" value="${q.v}"></div><div class="ik-f"><label>Sinal (R$)</label><input type="number" min="0" step="10" data-q="s" value="${q.s}"></div></div>
+      <p>Saldo: <b id="ik-saldo">${brl(Math.max(0, q.v - q.s))}</b></p><div class="ik-row">${btn("ENVIAR ORÇAMENTO", "enviarorc")}</div></div>`;
+    return `<h2>Solicitações de orçamento</h2><div class="ik-c">${S.stage === 1 && !S.recusada ? '<span class="ik-tag">NOVA SOLICITAÇÃO</span>' : ""}
+      <div class="ik-lin" style="margin-top:.8rem"><span>Cliente</span><b>${esc(r.cli)}</b><span>Estilo</span><b>${esc(r.estilo)}</b><span>Local</span><b>${esc(r.local)}</b><span>Tamanho</span><b>${esc(r.tam)}</b><span>Referências</span><b>📎 ${r.refs} imagens</b><span>Artista</span><b>${esc(r.artista)}</b><span>Descrição</span><b style="font-weight:400">“${esc(r.ideia)}”</b><span>Status</span><b>${stSol()}</b></div>
+      ${S.stage === 1 && !S.analisando ? `<div class="ik-row">${S.recusada ? btn("REABRIR", "reabrir", null, "btn-s") : btn("ANALISAR", "analisar") + btn("RECUSAR", "recusar", null, "btn-s")}</div>` : ""}${ed}</div>
+      <h2>Anteriores</h2><div class="ik-l"><span><b>Maria Souza</b> · Fine Line · Costela · 8 cm</span><span class="ik-st">🟢 Orçamento aceito</span></div><div class="ik-l"><span><b>Pedro Alves</b> · Fine Line · Antebraço · 12 cm</span><span class="ik-st">🟢 Sessão confirmada</span></div>`;
+  };
+
+  const selPanel = () => {
+    const s = S.sel; if (!s) return `<p class="ik-mut">Selecione um horário ou uma sessão na agenda.</p>`;
+    if (s.id) { const b = S.book.find((x) => x.id === s.id); if (!b) return "";
+      if (b.t === "b") return `<div class="ik-c"><b>Horário bloqueado</b> — ${b.art} ${hh(b.h)}<div class="ik-row">${btn("DESBLOQUEAR", "desbloq", null, "btn-s")}</div></div>`;
+      return `<div class="ik-c"><b>${esc(b.cli)}</b> · ${b.estilo} · ${b.art}<br><span class="ik-mut">${DIAS[b.dia][1]} · ${hh(b.h)} às ${hh(b.h + b.dur)} (${b.dur}h)</span>
+        ${S.open === b.id ? `<p class="ik-mut" style="margin-top:.6rem">${b.mine ? "Sessão confirmada automaticamente após o sinal." : "Sessão agendada."} Cliente notificado por WhatsApp e lembretes automáticos ativos.</p>` : ""}
+        <div class="ik-row">${btn("ABRIR", "abrir", null, "btn-s")}${btn("REAGENDAR", "reag", null, "btn-s")}${b.mine ? "" : btn("CANCELAR SESSÃO", "cancelar", null, "btn-s")}</div></div>`; }
+    return `<div class="ik-c"><b>Livre</b> — ${s.art} ${hh(s.h)}<div class="ik-row">${btn("BLOQUEAR HORÁRIO", "bloq", null, "btn-s")}</div></div>`;
+  };
+  V.estudio.agenda = () => {
+    let g = `<div class="ik-ag" style="grid-template-columns:54px repeat(3,minmax(120px,1fr))"><div></div>${ARTS.map((a, i) => `<div class="ik-agh" style="grid-column:${i + 2}">${a.toUpperCase()}<small>${ESP[a]}</small></div>`).join("")}`;
+    for (let h = H0; h < H1; h++) g += `<div class="ik-hr" style="grid-row:${h - H0 + 2}">${hh(h)}</div>`;
+    ARTS.forEach((a, i) => {
+      for (let h = H0; h < H1; h++) if (!S.book.some((b) => b.dia === S.agDia && b.art === a && h >= b.h && h < b.h + b.dur))
+        g += `<button class="ik-free${S.sel && !S.sel.id && S.sel.art === a && S.sel.h === h ? " sel" : ""}" type="button" data-a="cel" data-art="${a}" data-hh="${h}" style="grid-column:${i + 2};grid-row:${h - H0 + 2}">Livre</button>`;
+      S.book.filter((b) => b.dia === S.agDia && b.art === a).forEach((b) => {
+        g += `<button class="ik-bk${b.t === "b" ? " blk" : ""}${b.mine ? " mine" : ""}${S.sel && S.sel.id === b.id ? " sel" : ""}" type="button" data-a="bk" data-id="${b.id}" style="grid-column:${i + 2};grid-row:${b.h - H0 + 2}/span ${b.dur}"><b>${hh(b.h)}</b>${b.t === "b" ? "Bloqueado" : `${esc(b.cli)}<small>${b.estilo} · ${b.dur}h</small>`}</button>`; });
+    });
+    g += "</div>";
+    return `<h2>Agenda</h2><div class="ik-chips2" style="margin-bottom:1rem">${DIAS.map((x, i) => `<button class="ik-chip${S.agDia === i ? " on" : ""}" type="button" data-a="agdia" data-v="${i}">${x[0].toUpperCase()}</button>`).join("")}</div>
+      <div class="ik-agw">${g}</div>${selPanel()}`;
+  };
+
+  const cliJoao = () => { const c = { ...CLI[0], h: CLI[0].h.slice() }; if (S.stage === 6) { c.s++; c.g += Q().v; c.h.unshift(["Hoje", S.req.estilo, Q().v]); } return c; };
+  const listaCli = () => { const b = S.busca.trim().toLowerCase(); const L = [cliJoao(), ...CLI.slice(1)].filter((c) => c.n.toLowerCase().includes(b));
+    return L.map((c) => `<button class="ik-l" type="button" data-a="cli" data-v="${c.id}"><span><b>${c.n}</b><br><span class="ik-mut">${c.s} sessões</span></span><b>${brl(c.g)} gastos</b></button>`).join("") || '<p class="ik-mut">Nenhum cliente encontrado.</p>'; };
+  V.estudio.clientes = () => {
+    if (S.cli) { const c = [cliJoao(), ...CLI.slice(1)].find((x) => x.id === S.cli);
+      return `<h2>Perfil do cliente</h2><div class="ik-c">${btn("← Voltar", "clivoltar", null, "btn-s")}<h3 style="margin-top:1rem">${c.n}</h3>${lin([["Telefone", "(XX) XXXXX-XXXX"], ["Sessões", c.s], ["Total gasto", brl(c.g)]])}
+        <h4 style="margin:1.2rem 0 .5rem">Histórico</h4>${c.h.map((x) => `<div class="ik-l"><span><b>${x[0]}</b> · ${x[1]}</span><b>${brl(x[2])}</b></div>`).join("")}
+        <h4 style="margin:1rem 0 .5rem">Referências</h4><div class="ik-refs"><div class="ik-ref">📎</div><div class="ik-ref">📎</div></div><h4 style="margin:1rem 0 .4rem">Observações</h4><p class="ik-mut">“${c.obs}”</p></div>`; }
+    return `<h2>Clientes</h2><div class="ik-f"><input id="ik-busca" type="search" placeholder="🔎 Buscar cliente" value="${esc(S.busca)}"></div><div id="ik-clist">${listaCli()}</div>`;
+  };
+
+  V.estudio.projetos = () => {
+    const done = S.stage >= 5, q = Q(), tabs = ["Referências", "Notas", "Fotos", "Sessões", "Pagamentos"];
+    const conteudo = { "Referências": `<div class="ik-refs">${Array.from({ length: S.req.refs }, () => '<div class="ik-ref">📎</div>').join("")}</div>`,
+      "Notas": `<p class="ik-mut">“Composição geométrica com sombreamento. Cliente prefere sessões à tarde.”</p>`,
+      "Fotos": `<div class="ik-refs"><div class="ik-ref">📷</div><div class="ik-ref">📷</div></div><p class="ik-mut">Fotos do progresso e da cicatrização.</p>`,
+      "Sessões": "", "Pagamentos": lin([["Valor da sessão", brl(q.v)], ["Sinal", brl(q.s)], ["Saldo", S.stage >= 6 ? "R$ 0,00 (quitado)" : brl(q.v - q.s)]]) };
+    conteudo["Sessões"] = `<div class="ik-tl"><div class="ok">✓ Sessão 1</div><div class="ok">✓ Sessão 2</div><div class="${done ? "ok" : "now"}">${done ? "✓" : "→"} Sessão 3${done ? "" : " — próxima"}</div>${done ? '<div class="now">→ Sessão 4 — a definir</div>' : ""}</div>`;
+    return `<h2>Projetos</h2><div class="ik-c"><h3>${esc(S.req.cli)}</h3><p>Projeto: <b>Fechamento de antebraço</b></p><span class="ik-st">🟢 Em andamento</span>
+      <div class="ik-chips2" style="margin:1rem 0">${tabs.map((t) => `<button class="ik-chip${S.ptab === t ? " on" : ""}" type="button" data-a="ptab" data-v="${t}">${t}</button>`).join("")}</div>${conteudo[S.ptab]}
+      ${S.stage === 4 ? `<div class="ik-row">${btn("REALIZAR SESSÃO", "realizar")}</div><p class="ik-mut">Sessão agendada para ${slotTxt()}.</p>` : S.stage < 4 ? '<p class="ik-mut">A próxima sessão ainda não foi agendada. Complete as etapas anteriores do fluxo.</p>' : ""}</div>
+      ${S.stage >= 4 ? termo() : ""}`;
+  };
+
+  V.estudio.pagamentos = () => {
+    const q = Q(), s = S.stage;
+    const st = s <= 2 ? "⚪ Sem sinal" : s === 3 ? "🟡 Aguardando sinal" : s < 6 ? "🟢 Sinal recebido" : "🟢 Quitado";
+    const L = [["João", S.req.estilo, q.v, q.s, s === 6 ? 0 : q.v - q.s, st, s === 5], ["Maria", "Fine Line", 350, 100, 250, "🟢 Confirmado"], ["Pedro", "Fine Line", 480, 150, 330, "🟡 Aguardando sinal"], ["Carla", "Cover-up", 1100, 300, 800, "🟢 Confirmado"]];
+    const hoje = 1850 + (s === 6 ? q.v - q.s : 0), rec = 2300 + (s >= 4 && s < 6 ? q.v - q.s : 0), sin = 850 + (s >= 4 ? q.s : 0);
+    return `<h2>Pagamentos</h2><div class="ik-grid">${[["Hoje", hoje], ["A receber", rec], ["Sinais", sin]].map((x) => `<div class="ik-c ik-kpi hoje"><span>${x[0]}</span><b>${brl(x[1])}</b></div>`).join("")}</div>
+      <div class="ik-tw" style="margin-top:1rem"><table class="ik-t"><thead><tr><th>Cliente</th><th>Serviço</th><th>Valor</th><th>Sinal</th><th>Saldo</th><th>Status</th><th></th></tr></thead><tbody>
+      ${L.map((x) => `<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td>${brl(x[2])}</td><td>${brl(x[3])}</td><td>${brl(x[4])}</td><td>${x[5]}</td><td>${x[6] ? btn("RECEBER SALDO", "saldo", null, "btn-p") : ""}</td></tr>`).join("")}</tbody></table></div>`;
+  };
+
+  V.estudio.equipe = () => `<h2>Equipe</h2><div class="ik-grid">${ARTS.map((a) => `<div class="ik-c ik-w"><div class="vis" style="font-size:2.2rem;font-weight:800" aria-hidden="true">${a[0]}</div><h3>${a}</h3>
+    <p class="ik-mut">${ESP[a]}<br>${SESS[a]} sessões</p><span class="ik-st">${S.equipe[a] ? "🟢 Disponível" : "⚪ Indisponível"}</span>${btn(S.equipe[a] ? "MARCAR INDISPONÍVEL" : "MARCAR DISPONÍVEL", "disp", a, "btn-s")}</div>`).join("")}</div>`;
+
+  V.estudio.relatorios = () => `<h2>Relatórios</h2><div class="ik-c"><h3>Faturamento mensal</h3><div class="ik-cols">${[["Mai", 5.2], ["Jun", 6.1], ["Jul", 7.3], ["Ago", 8.45]].map((x) => `<div>R$ ${x[1].toFixed(1).replace(".", ",")} mil<i style="height:${x[1] * 10}%"></i>${x[0]}</div>`).join("")}</div></div>
+    <h2>Funil de orçamentos</h2><div class="ik-c">${[["Solicitações", 47, 100], ["Orçamentos", 41, 87], ["Confirmados", 32, 68]].map((x) => `<div class="ik-bar"><span>${x[0]}</span><div><i style="width:${x[2]}%"></i></div><b>${x[1]}</b></div>`).join("")}<p class="ik-mut">Conversão: 68% · No-show: 3%</p></div>`;
+
+  V.estudio.lembretes = () => { const dia = S.slot ? DIAS[S.slot.dia][1].toLowerCase() : "sexta-feira", hr = S.slot ? S.slot.h : 14, ok = S.stage >= 4;
+    const L = [["7 dias antes", "Seu horário está chegando."], ["2 dias antes", `Lembrete: sua sessão será ${dia} às ${hr}h.`], ["No dia", "Hoje é seu dia! 🖤"]];
+    return `<h2>Lembretes</h2><p class="ik-mut">Automações enviadas ao cliente pelo WhatsApp.${ok ? "" : " Elas são ativadas quando uma sessão é confirmada."}</p>${L.map((x, i) => `<div class="ik-c" style="margin-bottom:.8rem"><b>${x[0]}</b> <span class="ik-st" style="float:right">${S.lembr[i] ? "✓ Enviado" : ok ? "⏰ Agendado" : "⏸ Aguardando sessão"}</span>
+      ${S.lembr[i] ? `<div class="ik-bub">${x[1]}</div>` : ""}<div class="ik-row">${btn("SIMULAR ENVIO", "enviarlem", i, "btn-s", ok && !S.lembr[i] ? "" : "disabled")}</div></div>`).join("")}`; };
+
+  V.estudio.espera = () => `<h2>Lista de espera</h2><div class="ik-c"><b>SEXTA — 15:00</b><p class="ik-mut">Sessão cancelada.</p>
+    ${S.espera === 0 ? `<div class="ik-row">${btn("AVISAR LISTA DE ESPERA", "avisar")}</div>` : `<p style="margin-top:.8rem"><b>3 clientes interessados</b> foram avisados:</p>${["Bruna Costa", "Diego Rocha", "Larissa Gomes"].map((n, i) => `<div class="ik-l"><span>${n}</span><span class="ik-st">${S.espera === 2 && i === 0 ? "✓ Confirmou" : "📨 Avisado"}</span></div>`).join("")}`}
+    ${S.espera === 1 ? `<div class="ik-row">${btn("PREENCHER HORÁRIO", "preencher")}</div>` : ""}${S.espera === 2 ? '<p style="margin-top:.8rem"><span class="ik-st">✓ HORÁRIO PREENCHIDO</span></p><p class="ik-mut">O sistema recuperou o horário cancelado sem trabalho manual.</p>' : ""}</div>`;
+
+  /* ---------- montagem ---------- */
+  const topo = () => `<header class="dm-topo"><div class="dm-wrap"><div class="dm-barra">
+    <button class="dm-voltar" type="button" data-a="sair">← VOLTAR AO PORTFÓLIO</button>
+    <button class="ik-logo" type="button" data-a="home" aria-label="Tela inicial INKFLOW">INK<span>FLOW</span></button>
+    ${S.mode ? `<button class="dm-voltar" type="button" data-a="modo" data-v="${S.mode === "cliente" ? "estudio" : "cliente"}">${S.mode === "cliente" ? "Painel do estúdio" : "Área do cliente"}</button>` : ""}
+    ${S.mode === "cliente" ? btn("QUERO FAZER UMA TATUAGEM", "novo") : ""}
+  </div>${S.mode ? `<nav class="ik-nav" aria-label="Menu">${(S.mode === "cliente" ? NAVC : NAVE).map(([k, n]) => `<button type="button" data-a="ir" data-v="${k}" class="${S.view === k || (k === "orcamento" && S.view === "enviada") ? "on" : ""}">${n}</button>`).join("")}</nav>` : ""}</div></header>`;
+  const fluxo = () => { const p = proximo(); return `<div class="ik-flow"><span>${p.t}</span><span class="ik-row" style="margin:0">${btn(p.b, "fluxo")}${S.stage > 1 ? btn("REINICIAR", "reiniciar", null, "btn-s") : ""}</span></div>
+    <div class="ik-seg">${[1, 2, 3, 4, 5, 6].map((i) => `<i class="${S.stage >= i ? "on" : ""}"></i>`).join("")}</div>`; };
+  function render() {
+    const f = FLASH.find((x) => x.id === S.flashM);
+    $t("#ik-app").innerHTML = topo() + `<div class="dm-wrap ik-main">${S.mode ? fluxo() + V[S.mode][S.view]() : home()}</div>` +
+      (f ? `<div class="ik-modal"><div class="ik-md">${S.flashRes[f.id] ? `<div class="ik-big">✓</div><h2 style="margin-top:0">FLASH RESERVADO</h2><p class="ik-mut">Flash #${f.id} reservado. Sinal de ${brl(100)} confirmado.</p><div class="ik-row" style="justify-content:center">${btn("FALAR COM O ESTÚDIO", "wflash")}${btn("FECHAR", "fmodal", null, "btn-s")}</div>`
+        : `<h2 style="margin-top:0">FLASH #${f.id}</h2><div style="font-size:3rem">${f.i}</div><p class="ik-mut">${f.t} · ${f.l}</p>${lin([["Valor", brl(f.p)], ["Sinal", brl(100)]])}<div class="ik-row" style="justify-content:center">${btn("CONFIRMAR", "confflash")}${btn("Cancelar", "fmodal", null, "btn-s")}</div>`}</div></div>` : "");
+  }
+  function abrir() { y0 = window.scrollY; S = novo(); render(); raiz.hidden = false; raiz.scrollTop = 0; document.documentElement.style.overflow = "hidden"; raiz.focus(); }
+  function fechar() { raiz.hidden = true; document.documentElement.style.overflow = ""; window.scrollTo({ top: y0, behavior: "instant" }); }   // volta ao card "Qual site você precisa?"
+
+  document.addEventListener("click", (e) => { const a = e.target.closest("[data-demo=tatuagem]"); if (a) { e.preventDefault(); abrir(); } });
+  const TOPO = ["home", "modo", "ir", "novo", "fluxo", "reiniciar", "parecido", "enviar", "prox", "ant", "artista", "aceitar", "enviarorc"];
+  raiz.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-a]"); if (!t || t.disabled) return;
+    const d = t.dataset, a = d.a, v = d.v;
+    switch (a) {
+      case "sair": fechar(); return;
+      case "home": S.mode = null; S.view = "inicio"; break;
+      case "modo": S.mode = v; S.view = v === "cliente" ? "inicio" : "dashboard"; break;
+      case "ir": S.view = v; if (v === "agenda") S.sel = null; break;
+      case "novo": S.mode = "cliente"; S.draft = {}; S.step = 0; S.view = "orcamento"; break;
+      case "fluxo": { const p = proximo(); S.mode = p.m; S.view = p.v; if (p.cli) S.cli = p.cli; break; }
+      case "reiniciar": S = novo(); break;
+      case "wfalar": wpp("Olá! Vi a demonstração INKFLOW no seu portfólio e gostaria de falar com o estúdio."); return;
+      case "wflash": wpp(`Olá! Quero reservar o FLASH #${S.flashM} (sinal de ${brl(100)}).`); return;
+      case "wconf": { const q = Q(); wpp(`Olá! Gostaria de confirmar minha sessão no estúdio (demonstração INKFLOW).\n\nCliente: ${S.req.cli}\nServiço: ${servico()}\nArtista: ${S.slot.art}\nDia: ${DIAS[S.slot.dia][1]}\nHorário: ${hh(S.slot.h)}\nValor total: ${brl(q.v)}\nSinal: ${brl(q.s)}\nSaldo: ${brl(q.v - q.s)}\n\nObrigado!`); return; }
+      case "cat": S.cat = v; break;
+      case "parecido": { const w = TRAB[+v]; S.draft = { estilo: w.e === "Colorido" ? "Colorida" : w.e, de: w.n + " (" + w.e + ")" }; S.step = 0; S.view = "orcamento"; break; }
+      case "artista": S.draft = { artista: v }; S.step = 0; S.view = "orcamento"; break;
+      case "opt": S.draft[d.k] = v; break;
+      case "prox": S.step++; break;
+      case "ant": S.step--; break;
+      case "addref": S.draft.refs = Math.min(6, (S.draft.refs || 0) + 1); break;
+      case "rmref": S.draft.refs = Math.max(0, (S.draft.refs || 0) - 1); break;
+      case "enviar": { const x = S.draft; S.req = { cli: "João Silva", tipo: x.tipo || "Projeto personalizado", estilo: x.estilo || "Blackwork", local: x.local || "Braço", tam: x.tam || "Média", tamK: x.tam, refs: x.refs || 0,
+          ideia: (x.ideia || "").trim() || "Cliente não descreveu a ideia.", artista: x.artista || "Qualquer artista", quando: x.quando || "" };
+        S.stage = 1; S.quote = null; S.slot = null; S.pick = null; S.analisando = false; S.recusada = false; S.signed = false; S.chk = false; S.lembr = [0, 0, 0];
+        S.book = S.book.filter((b) => !b.mine); S.view = "enviada"; break; }
+      case "analisar": S.analisando = true; S.qd = qDef(S.req); break;
+      case "recusar": S.recusada = true; break;
+      case "reabrir": S.recusada = false; break;
+      case "enviarorc": S.quote = { ...S.qd }; S.stage = 2; S.analisando = false; toast("✓ Orçamento enviado ao cliente"); break;
+      case "aceitar": S.stage = 3; S.pick = null; break;
+      case "pdia": S.pd = +v; S.pick = null; break;
+      case "slot": S.pick = { dia: S.pd, art: d.art, h: +d.hh }; break;
+      case "sinal": S.slot = { ...S.pick }; S.book.push({ id: "meu", dia: S.slot.dia, art: S.slot.art, h: S.slot.h, dur: dur(), cli: "João Silva ★", estilo: S.req.estilo, t: "s", mine: 1 }); S.agDia = S.slot.dia; S.stage = 4; toast("🟢 Sinal recebido — sessão confirmada"); break;
+      case "assinar": S.signed = true; break;
+      case "realizar": S.stage = 5; toast("✓ Sessão realizada"); break;
+      case "saldo": S.stage = 6; toast("🟢 Pagamento final recebido"); break;
+      case "agdia": S.agDia = +v; S.sel = null; break;
+      case "cel": S.sel = { art: d.art, h: +d.hh }; break;
+      case "bk": S.sel = { id: d.id }; S.open = null; break;
+      case "abrir": S.open = S.sel.id; break;
+      case "bloq": S.book.push({ id: "b" + Date.now(), dia: S.agDia, art: S.sel.art, h: S.sel.h, dur: 1, cli: "", estilo: "", t: "b" }); S.sel = null; toast("Horário bloqueado"); break;
+      case "desbloq": S.book = S.book.filter((b) => b.id !== S.sel.id); S.sel = null; toast("Horário liberado"); break;
+      case "cancelar": S.book = S.book.filter((b) => b.id !== S.sel.id); S.sel = null; toast("Sessão cancelada — horário liberado"); break;
+      case "reag": { const b = S.book.find((x) => x.id === S.sel.id); let ok = false;
+        for (let dia = b.dia; dia < 6 && !ok; dia++) for (let h = dia === b.dia ? b.h + 1 : H0; h < H1 && !ok; h++) for (const ar of ARTS) if (!ok && livre(dia, ar, h, b.dur, b.id)) { b.dia = dia; b.art = ar; b.h = h; ok = true; break; }
+        if (ok) { if (b.mine) S.slot = { dia: b.dia, art: b.art, h: b.h }; S.agDia = b.dia; toast(`Reagendado para ${DIAS[b.dia][0]} ${hh(b.h)} · ${b.art}`); } else toast("Sem horário livre para reagendar"); break; }
+      case "cli": S.cli = v; break;
+      case "clivoltar": S.cli = null; break;
+      case "ptab": S.ptab = v; break;
+      case "enviarlem": S.lembr[+v] = 1; break;
+      case "avisar": S.espera = 1; break;
+      case "preencher": S.espera = 2; toast("✓ Horário preenchido"); break;
+      case "disp": S.equipe[v] = S.equipe[v] ? 0 : 1; break;
+      case "reservar": S.flashM = v; break;
+      case "confflash": S.flashRes[S.flashM] = 1; break;
+      case "fmodal": S.flashM = null; break;
+    }
+    render(); if (TOPO.includes(a)) raiz.scrollTop = 0;
+  });
+  raiz.addEventListener("input", (e) => {
+    const t = e.target;
+    if (t.id === "ik-busca") { S.busca = t.value; $t("#ik-clist").innerHTML = listaCli(); }
+    else if (t.dataset.q) { S.qd[t.dataset.q] = Math.max(0, +t.value || 0); $t("#ik-saldo").textContent = brl(Math.max(0, S.qd.v - S.qd.s)); }
+    else if (t.id === "ik-ideia") S.draft.ideia = t.value;
+    else if (t.id === "ik-data") S.draft.quando = t.value;
+  });
+  raiz.addEventListener("change", (e) => { if (e.target.id === "ik-chk") { S.chk = e.target.checked; render(); } });
+  document.addEventListener("keydown", (e) => { if (e.key !== "Escape" || raiz.hidden) return; if (S.flashM) { S.flashM = null; render(); } else fechar(); });
+})();
+</script>
+</body>
+</html>
